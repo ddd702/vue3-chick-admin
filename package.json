@@ -2,6 +2,7 @@
   "name": "myadmin-vue3",
   "version": "0.0.0",
   "scripts": {
+    "prepare": "husky install",
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
@@ -10,7 +11,8 @@
     "test:e2e:ci": "start-server-and-test preview http://localhost:4173/ 'cypress run --e2e'",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
+    "lint-staged": "lint-staged",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .eslintignore"
   },
   "dependencies": {
     "pinia": "^2.0.17",
@@ -38,6 +40,10 @@
     "typescript": "~4.7.4",
     "vite": "^3.0.4",
     "vitest": "^0.21.0",
-    "vue-tsc": "^0.39.5"
+    "vue-tsc": "^0.39.5",
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3"
   }
 }
