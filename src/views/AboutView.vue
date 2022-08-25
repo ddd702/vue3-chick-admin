@@ -1,10 +1,10 @@
 <script lang="ts">
-import { defineComponent, Ref } from 'vue';
+import { defineComponent } from 'vue';
 import { ref } from 'vue';
 export default defineComponent({
   setup() {
-    const title: Ref<string> = ref(import.meta.env.VITE_APP_TITLE);
-    const description: Ref<string> = ref('说明');
+    const title = ref(import.meta.env.VITE_APP_TITLE);
+    const description = ref('说明');
     return {
       title,
       description,

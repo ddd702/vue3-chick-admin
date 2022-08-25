@@ -1,5 +1,5 @@
 {
-  "src/**/*.{vue,js,ts,scss}": [
+  "src/**/*.{vue,js,ts}": [
     "npm run lint"
   ]
 }
