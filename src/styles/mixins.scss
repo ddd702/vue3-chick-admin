@@ -26,6 +26,10 @@
   width: 100%;
   height: 100%;
 }
+@mixin flexCenter {
+  display: flex;
+  align-items:center;
+}
 
 @mixin radiusColor($radius, $color) {
   position: relative;
