@@ -2,14 +2,15 @@
 :root {
   --main-bg-color:#fff;
   --main-text-color:#333;
-  --header-bg-color:rgb(250, 244, 244);
+  --header-bg-color:rgb(255, 255, 255);
+  --aside-bg-color:#fff;
   --header-height:70px;
   --logo-bg:url(https://cdn.zcxnb.cn/cloud/2022/08/25/zbStaGNY_admin-logo.png);
   --logo-bg-fold:url(https://cdn.zcxnb.cn/cloud/2022/08/25/XGw6u63h_admin-minilogo.png);
   --logo-width-fold:50px;
   --logo-height-fold:50px;
   --logo-height:50px;
-  --header-left-width:200px;
+  --header-left-width:220px;
   --header-left-width-fold:70px;
   --logo-width:150px;
 }
@@ -17,6 +18,8 @@
   --main-text-color:#eee;
   --main-bg-color:#333;
   --header-bg-color:rgb(32, 29, 44);
+  --aside-bg-color:#222;
+  // --aside-r-border-color:rgb(32, 29, 44);
 }
 
 *,

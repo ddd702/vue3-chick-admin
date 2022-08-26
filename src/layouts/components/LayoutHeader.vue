@@ -1,112 +1,110 @@
 <template>
   <header class="app-header">
-    <div class="app-header-l" :class="{ fold: !layoutStore.leftMenuOpen }">
-      <div class="app-logo"></div>
-    </div>
-    <div class="app-header-r">
-      <el-icon class="t-pointer" :size="iconSize" @click="toggleMenu">
-        <Fold v-if="layoutStore.leftMenuOpen" />
-        <Expand v-else />
-      </el-icon>
-      <section class="app-top-menu">
-        <div class="top-icon-item">
-          <el-tooltip content="查看异常日志" placement="bottom-end">
-            <el-badge
-              :hidden="false"
-              :value="12"
-              style="display: flex; padding: 0"
-            >
-              <el-icon class="t-pointer" :size="iconSize" @click="toErrorPage">
-                <Warning />
-              </el-icon>
-            </el-badge>
-          </el-tooltip>
-        </div>
-        <div class="top-icon-item">
-          <el-tooltip
-            :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
-            placement="bottom-end"
+    <el-icon class="t-pointer menu-toggle" :size="iconSize" @click="toggleMenu">
+      <Fold v-if="layoutStore.leftMenuOpen" />
+      <Expand v-else />
+    </el-icon>
+    <section class="app-top-menu">
+      <div class="top-icon-item">
+        <el-tooltip content="查看异常日志" placement="bottom-end">
+          <el-badge
+            :hidden="logStore.count <= 0"
+            :value="logStore.count"
+            style="display: flex; padding: 0"
           >
-            <el-icon
-              class="t-pointer"
-              :class="{ 'icon-unactive': layoutStore.fullScreen }"
-              :size="iconSize"
-              @click="toggleFullScreen"
-            >
-              <FullScreen />
+            <el-icon class="t-pointer" :size="iconSize" @click="openLogDialog">
+              <Warning />
             </el-icon>
-          </el-tooltip>
-        </div>
-        <div class="top-icon-item">
-          <el-tooltip
-            :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
-            placement="bottom-end"
+          </el-badge>
+        </el-tooltip>
+      </div>
+      <div class="top-icon-item">
+        <el-tooltip
+          :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
+          placement="bottom-end"
+        >
+          <el-icon
+            class="t-pointer"
+            :class="{ 'icon-unactive': layoutStore.fullScreen }"
+            :size="iconSize"
+            @click="toggleFullScreen"
           >
-            <el-icon class="t-pointer" :size="iconSize" @click="toggleDrak">
-              <Sunny v-if="layoutStore.dark" />
-              <Moon v-else />
-            </el-icon>
-          </el-tooltip>
+            <FullScreen />
+          </el-icon>
+        </el-tooltip>
+      </div>
+      <div class="top-icon-item">
+        <el-tooltip
+          :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
+          placement="bottom-end"
+        >
+          <el-icon class="t-pointer" :size="iconSize" @click="toggleDrak">
+            <Sunny v-if="layoutStore.dark" />
+            <Moon v-else />
+          </el-icon>
+        </el-tooltip>
+      </div>
+      <el-dropdown trigger="click" class="top-icon-item">
+        <div class="user-cell t-pointer">
+          <el-image class="app-avatar" fit="contain" :src="userStore.avatar" />
+          <span>{{ userStore.userName }}</span>
         </div>
-        <el-dropdown trigger="click" class="top-icon-item">
-          <div class="user-cell t-pointer">
-            <el-image
-              class="app-avatar"
-              fit="contain"
-              :src="userStore.avatar"
-            />
-            <span>{{ userStore.userName }}</span>
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <template v-if="userStore.isLogin">
-                <el-dropdown-item>
-                  <RouterLink class="t-block" :to="{ path: '/changePsw' }">
-                    修改密码
-                  </RouterLink>
-                </el-dropdown-item>
-                <el-dropdown-item @click="handleLoginOut">
-                  退出登录
-                </el-dropdown-item>
-              </template>
-              <template v-else>
-                <el-dropdown-item>
-                  <RouterLink class="t-block" :to="{ path: '/login' }">
-                    登录/注册
-                  </RouterLink>
-                </el-dropdown-item>
-              </template>
-            </el-dropdown-menu>
-            <el-dropdown-item>
-              <RouterLink class="t-block" :to="{ path: '/about' }">
-                关于
-              </RouterLink>
-            </el-dropdown-item>
-          </template>
-        </el-dropdown>
-      </section>
-    </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <template v-if="userStore.isLogin">
+              <el-dropdown-item>
+                <RouterLink class="t-block" :to="{ path: '/changePsw' }">
+                  修改密码
+                </RouterLink>
+              </el-dropdown-item>
+              <el-dropdown-item @click="handleLoginOut">
+                退出登录
+              </el-dropdown-item>
+            </template>
+            <template v-else>
+              <el-dropdown-item>
+                <RouterLink class="t-block" :to="{ path: '/login' }">
+                  登录/注册
+                </RouterLink>
+              </el-dropdown-item>
+            </template>
+          </el-dropdown-menu>
+          <el-dropdown-item>
+            <RouterLink class="t-block" :to="{ path: '/about' }">
+              关于
+            </RouterLink>
+          </el-dropdown-item>
+        </template>
+      </el-dropdown>
+    </section>
+    <LogDialog />
   </header>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import LogDialog from './LogDialog.vue';
 import { useLayoutStore } from '@/stores/layout';
 import { useUserStore } from '@/stores/user';
+import { useLogStore } from '@/stores/log';
 import Utils from '@/utils';
+
 export default defineComponent({
   setup() {
     const layoutStore = useLayoutStore();
     const userStore = useUserStore();
+    const logStore = useLogStore();
     return {
       iconSize: ref(20),
       layoutStore,
       userStore,
+      logStore,
     };
   },
   components: {
     RouterLink,
+    LogDialog,
   },
   mounted() {
     document.addEventListener('fullscreenchange', () => {
@@ -124,6 +122,9 @@ export default defineComponent({
     toggleDrak() {
       this.layoutStore.switchDark();
     },
+    openLogDialog() {
+      this.logStore.switchVisible();
+    },
     toggleFullScreen() {
       Utils.setFullScreen();
     },
@@ -134,39 +135,20 @@ export default defineComponent({
 <style lang="scss">
 .app {
   &-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding-right: 2vw;
     background-color: var(--header-bg-color, #fff);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;
     @include flexCenter();
     height: var(--header-height, 70px);
-    &-l {
-      width: var(--header-left-width);
-      justify-content: center;
-      @include flexCenter();
-      transition: width 0.5s;
-      &.fold {
-        width: var(--header-left-width-fold);
-        .app-logo {
-          background-image: var(--logo-bg-fold, transparent);
-          width: var(--logo-width-fold);
-          height: var(--logo-height-fold);
-        }
-      }
+    .menu-toggle {
+      margin-left: 2vw;
     }
-    &-r {
-      flex: 1;
-      @include flexCenter();
-    }
-  }
-  &-logo {
-    background-image: var(--logo-bg, transparent);
-    background-repeat: no-repeat;
-    background-position: center;
-    width: var(--logo-width);
-    height: var(--logo-height);
-    background-size: contain;
   }
   &-top-menu {
     justify-content: flex-end;
-    padding: 0 2vw;
     flex: 1;
     @include flexCenter();
     .user-cell {

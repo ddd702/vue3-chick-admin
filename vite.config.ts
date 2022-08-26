@@ -1,5 +1,6 @@
 import { fileURLToPath, URL } from 'node:url';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -27,6 +28,7 @@ export default defineConfig({
         },
       },
     }),
+    visualizer(),
   ],
   css: {
     /* CSS 预处理器 */
@@ -46,6 +48,6 @@ export default defineConfig({
   },
   build: {
     manifest: true,
-    sourcemap: true,
+    sourcemap: true
   },
 });
