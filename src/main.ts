@@ -2,24 +2,26 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import AppIcon from '@/components/AppIcon.vue';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
-import dayjs from 'dayjs';
 import App from './App.vue';
 import router from './router';
+import Utils from './utils';
 import { useLayoutStore } from '@/stores/layout';
 import { useLogStore, LogType } from '@/stores/log';
 import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import './styles/app.scss';
-
+import './styles/iconfont/iconfont.css';
+(window as any).appUtils = Utils;
 const app = createApp(App);
-
 app.use(createPinia());
 app.use(router);
 app.use(ElementPlus, {
   locale: zhCn,
 });
 //注册全局组件
+app.component('AppIcon', AppIcon);
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
@@ -31,7 +33,6 @@ app.config.errorHandler = (err: any, _instance, info) => {
   console.error('vue err', err);
   // 处理错误，例如：报告给一个服务
   logStore.add({
-    time: dayjs().format('YYYY-M-D HH:mm:ss'),
     info: err.message || '未知错误',
     err,
     type: LogType.Err,

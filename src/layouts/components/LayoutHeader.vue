@@ -1,9 +1,13 @@
 <template>
   <header class="app-header">
-    <el-icon class="t-pointer menu-toggle" :size="iconSize" @click="toggleMenu">
-      <Fold v-if="layoutStore.leftMenuOpen" />
-      <Expand v-else />
-    </el-icon>
+    <span class="t-pointer menu-toggle" @click="toggleMenu">
+      <app-icon
+        class="icon-fold"
+        :size="iconSize"
+        v-if="layoutStore.leftMenuOpen"
+      />
+      <app-icon class="icon-expand" :size="iconSize" v-else />
+    </span>
     <section class="app-top-menu">
       <div class="top-icon-item">
         <el-tooltip content="查看异常日志" placement="bottom-end">
@@ -12,9 +16,11 @@
             :value="logStore.count"
             style="display: flex; padding: 0"
           >
-            <el-icon class="t-pointer" :size="iconSize" @click="openLogDialog">
-              <Warning />
-            </el-icon>
+            <app-icon
+              class="t-pointer icon-debug"
+              :size="iconSize"
+              @click="openLogDialog"
+            />
           </el-badge>
         </el-tooltip>
       </div>
@@ -23,14 +29,15 @@
           :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
           placement="bottom-end"
         >
-          <el-icon
+          <app-icon
             class="t-pointer"
-            :class="{ 'icon-unactive': layoutStore.fullScreen }"
+            :class="{
+              'icon-zoomout': layoutStore.fullScreen,
+              'icon-zoomin': !layoutStore.fullScreen,
+            }"
             :size="iconSize"
             @click="toggleFullScreen"
-          >
-            <FullScreen />
-          </el-icon>
+          />
         </el-tooltip>
       </div>
       <div class="top-icon-item">
@@ -38,10 +45,15 @@
           :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
           placement="bottom-end"
         >
-          <el-icon class="t-pointer" :size="iconSize" @click="toggleDrak">
-            <Sunny v-if="layoutStore.dark" />
-            <Moon v-else />
-          </el-icon>
+          <app-icon
+            class="t-pointer"
+            :class="{
+              'icon-sun': layoutStore.dark,
+              'icon-moon': !layoutStore.dark,
+            }"
+            :size="iconSize"
+            @click="toggleDrak"
+          />
         </el-tooltip>
       </div>
       <el-dropdown trigger="click" class="top-icon-item">

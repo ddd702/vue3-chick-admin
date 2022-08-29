@@ -12,6 +12,7 @@ import { RouterView } from 'vue-router';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutAside from './components/LayoutAside.vue';
 import { useLayoutStore } from '@/stores/layout';
+import { hito } from '@/apis/test';
 export default {
   components: {
     RouterView,
@@ -23,6 +24,10 @@ export default {
     return {
       layoutStore,
     };
+  },
+  async mounted() {
+    const res = await hito();
+    console.warn('hito res', res);
   },
 };
 </script>

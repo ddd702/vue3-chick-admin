@@ -1,4 +1,7 @@
+import cookies from 'js-cookie';
 export default {
+  isDev: !!(import.meta.env.MODE === 'development'),
+  cookies,
   setFullScreen(): boolean {
     if (document.fullscreenElement) {
       document.exitFullscreen();

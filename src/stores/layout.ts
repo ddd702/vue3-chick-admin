@@ -8,6 +8,7 @@ type StateType = {
   leftMenuOpen: boolean;
   fullScreen: boolean;
   dark: boolean;
+  asideMenu: [];
 };
 
 export const useLayoutStore = defineStore({
@@ -27,9 +28,13 @@ export const useLayoutStore = defineStore({
       fullScreen: false,
       leftMenuOpen,
       dark,
+      asideMenu: [],
     };
   },
   actions: {
+    setAsideMenu(val: []): void {
+      this.asideMenu = val;
+    },
     switchFullScreen(val: boolean): void {
       this.fullScreen = val;
     },

@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
 import LayoutIndex from '@/layouts/LayoutIndex.vue';
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

@@ -2,6 +2,7 @@
  * 系统错误收集
  * */
 import { defineStore } from 'pinia';
+import dayjs from 'dayjs';
 const maxLen = 20; //最多多少条
 export enum LogType {
   Log = 'log',
@@ -9,9 +10,9 @@ export enum LogType {
   Err = 'error',
 }
 type ItemType = {
-  time: string; //记录的时间
+  time?: string; //记录的时间
   type: LogType; // 类型
-  url: string;
+  url?: string;
   info: string;
   err?: unknown;
   title: string;
@@ -42,6 +43,8 @@ export const useLogStore = defineStore({
       this.visible = !this.visible;
     },
     add(item: ItemType): void {
+      item.time = dayjs().format('YYYY-M-D HH:mm:ss');
+      item.url = location.href;
       if (this.list.length >= maxLen) {
         this.list.pop();
       }

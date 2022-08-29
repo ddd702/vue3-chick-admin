@@ -2,7 +2,7 @@
 build/
 tests/
 node_modules/
-
+src/styles/
 # node 覆盖率文件
 coverage/
 
