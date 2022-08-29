@@ -38,6 +38,7 @@ export default {
     min-height: 100%;
   }
   &-right {
+    width: 100%;
     transition: padding 0.5s;
     padding-left: var(--header-left-width);
     &.fold {

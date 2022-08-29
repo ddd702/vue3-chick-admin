@@ -1,56 +1,59 @@
 <template>
   <div class="app-aside" :class="{ fold: !layoutStore.leftMenuOpen }">
     <div class="app-logo"></div>
-    <el-menu
-      default-active="2"
-      class="app-aside-menu"
-      :collapse="!layoutStore.leftMenuOpen"
-      @open="handleOpen"
-      @close="handleClose"
-    >
-      <el-sub-menu index="1">
-        <template #title>
-          <el-icon><location /></el-icon>
-          <span>Navigator One</span>
+    <div class="app-aside-inner">
+      <el-menu
+        class="app-aside-menu"
+        :collapse="!layoutStore.leftMenuOpen"
+        :router="true"
+        @open="handleOpen"
+        @close="handleClose"
+      >
+        <template v-for="(item, index) in layoutStore.asideMenu" :key="index">
+          <el-sub-menu v-if="item.children" :index="'' + index">
+            <!-- <app-icon class="icon-doc" /> -->
+            <template #title>
+              <el-icon>
+                <app-icon class="icon-doc" :class="setIcon(item)" />
+              </el-icon>
+              <span>{{ item.title }}</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item
+                :route="{ path: item2.path || '' }"
+                v-for="(item2, index2) in item.children"
+                :index="index + '_' + index2"
+                :key="index2"
+              >
+                <el-icon v-if="item2.icon">
+                  <app-icon class="icon-doc" :class="setIcon(item2)" />
+                </el-icon>
+                <template #title>{{ item2.title }}</template>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-sub-menu>
+          <el-menu-item
+            v-else
+            :route="{ path: item.path || '' }"
+            :index="'' + index"
+          >
+            <el-icon>
+              <app-icon class="icon-doc" :class="setIcon(item)" />
+            </el-icon>
+            <template #title>{{ item.title }}</template>
+          </el-menu-item>
         </template>
-        <el-menu-item-group>
-          <template #title><span>Group One</span></template>
-          <el-menu-item index="1-1">item one</el-menu-item>
-          <el-menu-item index="1-2">item two</el-menu-item>
-        </el-menu-item-group>
-      </el-sub-menu>
-      <template v-for="(item, index) in layoutStore.asideMenu" :key="index">
-        <el-sub-menu v-if="item.children" :index="'' + index">
-          <!-- <app-icon class="icon-doc" /> -->
-          <template #title>
-            <app-icon class="icon-doc" />
-            <span>{{ item.title }}</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item
-              :route="item2.path || ''"
-              v-for="(item2, index2) in item.children"
-              :index="index + '_' + index2"
-              :key="index2"
-            >
-              <app-icon v-if="item2.icon" class="icon-doc" />
-              <span>{{ item2.title }}</span>
-            </el-menu-item>
-          </el-menu-item-group>
-        </el-sub-menu>
-        <el-menu-item v-else :route="item.path || ''" :index="'' + index">
-          <app-icon class="icon-doc" />
-          <template #title>{{ item.title }}</template>
-        </el-menu-item>
-      </template>
-    </el-menu>
+      </el-menu>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
 import { useLayoutStore } from '@/stores/layout';
 import { getDataByCode } from '@/apis/sys';
-export default {
+
+export default defineComponent({
   setup() {
     const layoutStore = useLayoutStore();
     return {
@@ -71,8 +74,13 @@ export default {
     handleClose(key: string, keyPath: string[]) {
       console.log('close', key, keyPath);
     },
+    setIcon(item: any): any {
+      const outClass: any = {};
+      outClass['icon-' + item.icon] = true;
+      return outClass;
+    },
   },
-};
+});
 </script>
 
 <style lang="scss">
@@ -84,6 +92,7 @@ export default {
     width: var(--logo-width);
     height: var(--logo-height);
     background-size: contain;
+    margin: 0 auto;
   }
   &-aside {
     --el-menu-bg-color: transparent;
@@ -93,12 +102,12 @@ export default {
     left: 0;
     height: 100%;
     padding: 10px 0;
+    overflow-y: auto;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
       rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     // border-right: 1px solid var(--aside-r-border-color,#ddd);
     z-index: 2;
     width: var(--header-left-width);
-    @include flexCenter();
     background-color: var(--aside-bg-color, #fff);
     flex-direction: column;
     transition: width 0.5s;
@@ -114,6 +123,10 @@ export default {
       }
     }
   }
+  &-aside-inner {
+    height: calc(100% - var(--logo-height));
+    overflow-y: auto;
+  }
 }
 @media (max-width: 500px) {
   .app {
@@ -122,6 +135,9 @@ export default {
         width: 0;
         overflow-x: hidden;
       }
+    }
+    &-aside-inner {
+      height: calc(100% - var(--logo-height-fold));
     }
   }
 }

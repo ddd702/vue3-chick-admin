@@ -11,6 +11,7 @@ export async function requestFun(
   params: paramsType
 ): Promise<void> {
   let res = {
+    data: null,
     rcode: 500,
     msg: 'requset error',
   };
