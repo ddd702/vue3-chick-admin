@@ -65,7 +65,13 @@ service.interceptors.response.use(
     // 这个状态码是和后端约定的
     const { rcode } = dataAxios;
     const errMsg = dataAxios.msg || '';
-    const otherinfo = `<p>data:--->${response.config.data}</p><p>url:--->${response.config.url}</p>`;
+    const otherinfo = `<p>methods:${
+      response.config.method
+    }</p><p>data:${JSON.stringify(
+      response.config.data
+    )}</p><p>params:${JSON.stringify(response.config.params)}</p><p>url:${
+      response.config.url
+    }</p>`;
     // 根据 code 进行判断
     console.log('otherinfo', response.config);
     if (rcode === undefined) {

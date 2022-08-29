@@ -3,6 +3,9 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import AppIcon from '@/components/AppIcon.vue';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
+//引入 nprogress
+import NProgress from 'nprogress'; // 进度条
+import 'nprogress/nprogress.css'; // 引入样式
 import App from './App.vue';
 import router from './router';
 import Utils from './utils';
@@ -36,6 +39,20 @@ app.config.errorHandler = (err: any, _instance, info) => {
     title: info,
   });
 };
+// 简单配置
+NProgress.inc(0.2);
+NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false });
+
+// 进度条开始
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+
+// 进度条结束
+router.afterEach(() => {
+  NProgress.done();
+});
 // 设置一些页面布局的操作
 /** 设置暗黑还是浅色模式
  */

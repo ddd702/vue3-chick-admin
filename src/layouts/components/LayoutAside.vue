@@ -6,8 +6,6 @@
         class="app-aside-menu"
         :collapse="!layoutStore.leftMenuOpen"
         :router="true"
-        @open="handleOpen"
-        @close="handleClose"
       >
         <template v-for="(item, index) in layoutStore.asideMenu" :key="index">
           <el-sub-menu v-if="item.children" :index="'' + index">
@@ -44,6 +42,11 @@
           </el-menu-item>
         </template>
       </el-menu>
+      <el-empty
+        :image-size="layoutStore.leftMenuOpen ? 100 : 50"
+        v-if="layoutStore.asideMenu.length === 0"
+        description="无菜单"
+      />
     </div>
   </div>
 </template>
@@ -67,12 +70,6 @@ export default defineComponent({
     async fetchData() {
       const res = await getDataByCode({ code: 'clay-menu' });
       this.layoutStore.setAsideMenu(JSON.parse(res.data));
-    },
-    handleOpen(key: string, keyPath: string[]) {
-      console.log('open', key, keyPath);
-    },
-    handleClose(key: string, keyPath: string[]) {
-      console.log('close', key, keyPath);
     },
     setIcon(item: any): any {
       const outClass: any = {};
