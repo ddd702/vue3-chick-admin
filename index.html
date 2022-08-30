@@ -5,9 +5,44 @@
     <link rel="icon" href="https://cdn.zcxnb.cn/myblog_admin/icon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%- title %></title>
+    <style type="text/css">
+      @media (prefers-color-scheme: dark) {
+        .app-empty   { background:  #333; color: white; }
+      }
+      .app-empty{
+        position: absolute;
+        top: 0; 
+        left:0;
+        width: 100vw;
+        height: 100vh;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .app-empty-loading{
+        width:10%;
+        max-width: 30px;
+      }
+      .app-empty-text{
+        font-size: 14px;
+        margin:30px 0;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <noscript>
+      <strong>
+        抱歉！您的浏览器未开启或者不支持javascript
+      </strong>
+    </noscript>
+    <div id="app">
+      <div class="app-empty">
+        <img class="app-empty-loading" src="/image/loading-spin.svg"/>
+        <p class="app-empty-text">正在加载系统资源</p>
+      </div>
+    </div>
     <%- injectScript %>
   </body>
 </html>

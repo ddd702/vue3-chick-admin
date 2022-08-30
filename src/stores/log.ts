@@ -4,14 +4,14 @@
 import { defineStore } from 'pinia';
 import dayjs from 'dayjs';
 const maxLen = 20; //最多多少条
-export enum LogType {
+export enum LogEnum {
   Log = 'log',
   Warn = 'warn',
   Err = 'error',
 }
 type ItemType = {
   time?: string; //记录的时间
-  type: LogType; // 类型
+  type: LogEnum; // 类型
   url?: string;
   info: string;
   err?: unknown;
@@ -44,7 +44,9 @@ export const useLogStore = defineStore({
     },
     add(item: ItemType): void {
       item.time = dayjs().format('YYYY-M-D HH:mm:ss');
-      item.url = location.href;
+      if (!item.url) {
+        item.url = location.href;
+      }
       if (this.list.length >= maxLen) {
         this.list.pop();
       }

@@ -10,7 +10,7 @@
     </span>
     <section class="app-top-menu">
       <div class="top-icon-item">
-        <el-tooltip content="查看异常日志" placement="bottom-end">
+        <el-tooltip content="查看调试日志" placement="bottom-end">
           <el-badge
             :hidden="logStore.count <= 0"
             :value="logStore.count"

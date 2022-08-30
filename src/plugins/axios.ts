@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
-import { useLogStore, LogType } from '@/stores/log';
+import { useLogStore, LogEnum } from '@/stores/log';
 import Utils from '@/utils';
 
 // 创建一个错误
@@ -15,7 +15,7 @@ function errorLog(err: Error, moreInfo = '') {
   const logStore = useLogStore();
   // 添加到日志
   logStore.add({
-    type: LogType.Err,
+    type: LogEnum.Err,
     info: err.message,
     title: '数据请求异常',
     moreInfo,
@@ -73,15 +73,12 @@ service.interceptors.response.use(
       response.config.url
     }</p>`;
     // 根据 code 进行判断
-    console.log('otherinfo', response.config);
     if (rcode === undefined) {
       // 如果没有 code 代表这不是项目后端开发的接口
       return dataAxios;
     } else {
       // 有 code 代表这是一个后端接口 可以进行进一步的判断
       if (rcode === 702) {
-        // util.cookies.set('redirect', app.$route.fullPath);
-        // store.dispatch('d2admin/account/logout', { vm: app, confirm: false });
         errorCreat({ msg: `${errMsg}`, otherinfo });
         return;
       }

@@ -47,20 +47,20 @@
 </template>
 
 <script lang="ts" setup>
-import { useLogStore, LogType } from '@/stores/log';
+import { useLogStore, LogEnum } from '@/stores/log';
 const logStore = useLogStore();
 const typeFilters = [
   {
-    text: LogType.Err,
-    value: LogType.Err,
+    text: LogEnum.Err,
+    value: LogEnum.Err,
   },
   {
-    text: LogType.Log,
-    value: LogType.Log,
+    text: LogEnum.Log,
+    value: LogEnum.Log,
   },
   {
-    text: LogType.Warn,
-    value: LogType.Warn,
+    text: LogEnum.Warn,
+    value: LogEnum.Warn,
   },
 ];
 const handleTypeFilter = (value: string, row: any, column: any): boolean => {

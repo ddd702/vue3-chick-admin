@@ -6,10 +6,10 @@
         class="app-aside-menu"
         :collapse="!layoutStore.leftMenuOpen"
         :router="true"
+        :default-active="layoutStore.asideMenuActive"
       >
         <template v-for="(item, index) in layoutStore.asideMenu" :key="index">
-          <el-sub-menu v-if="item.children" :index="'' + index">
-            <!-- <app-icon class="icon-doc" /> -->
+          <el-sub-menu v-if="item.children" :index="item.hash">
             <template #title>
               <el-icon>
                 <app-icon class="icon-doc" :class="setIcon(item)" />
@@ -20,7 +20,7 @@
               <el-menu-item
                 :route="{ path: item2.path || '' }"
                 v-for="(item2, index2) in item.children"
-                :index="index + '_' + index2"
+                :index="item2.hash"
                 :key="index2"
               >
                 <el-icon v-if="item2.icon">
@@ -33,7 +33,7 @@
           <el-menu-item
             v-else
             :route="{ path: item.path || '' }"
-            :index="'' + index"
+            :index="item.hash"
           >
             <el-icon>
               <app-icon class="icon-doc" :class="setIcon(item)" />
@@ -53,11 +53,12 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { MenuItem } from '@/stores/layout';
 import { useLayoutStore } from '@/stores/layout';
 import { getDataByCode } from '@/apis/sys';
 
 export default defineComponent({
-  setup() {
+  setup(): any {
     const layoutStore = useLayoutStore();
     return {
       layoutStore,
@@ -71,9 +72,9 @@ export default defineComponent({
       const res = await getDataByCode({ code: 'clay-menu' });
       this.layoutStore.setAsideMenu(JSON.parse(res.data));
     },
-    setIcon(item: any): any {
+    setIcon(item: MenuItem): object {
       const outClass: any = {};
-      outClass['icon-' + item.icon] = true;
+      outClass[`icon-${item.icon}`] = true;
       return outClass;
     },
   },

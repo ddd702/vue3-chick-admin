@@ -3,12 +3,23 @@
  * */
 import { defineStore } from 'pinia';
 import { Storage } from '@/constants';
+import { useRouteStore } from './route';
 import Utils from '@/utils';
+export type MenuItem = {
+  hash?: string;
+  id?: string | number;
+  path?: string;
+  title: string;
+  enTitle?: string; // 英文标题
+  icon?: string;
+  children?: Array<MenuItem>;
+};
 type StateType = {
   leftMenuOpen: boolean;
   fullScreen: boolean;
   dark: boolean;
-  asideMenu: any;
+  asideMenuActive: string; // 活跃的菜单index
+  asideMenu: Array<MenuItem>;
 };
 
 export const useLayoutStore = defineStore({
@@ -27,13 +38,38 @@ export const useLayoutStore = defineStore({
     return {
       fullScreen: false,
       leftMenuOpen,
+      asideMenuActive: '0',
       dark,
       asideMenu: [],
     };
   },
   actions: {
-    setAsideMenu(val: []): void {
+    updateAsideMenuActive(): void {
+      const route = useRouteStore().currentRoute;
+      if (!route) {
+        return;
+      }
+      // 根据路径更新active的index
+      const { fullPath } = route;
+      let outIndex = '';
+      const findIndex = (item: any, index: number) => {
+        if (item.path === fullPath) {
+          outIndex = item.hash;
+          return;
+        }
+        item?.children?.map(findIndex);
+      };
+      this.asideMenu?.map(findIndex);
+      this.asideMenuActive = outIndex;
+    },
+    setAsideMenu(val: Array<MenuItem>): void {
+      function addIndex(item: MenuItem, index: number) {
+        item.hash = Utils.randStr(5);
+        item.children?.map(addIndex);
+      }
+      val.map(addIndex);
       this.asideMenu = val;
+      this.updateAsideMenuActive();
     },
     switchFullScreen(val: boolean): void {
       this.fullScreen = val;
