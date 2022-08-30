@@ -100,6 +100,7 @@ import LogDialog from './LogDialog.vue';
 import { useLayoutStore } from '@/stores/layout';
 import { useUserStore } from '@/stores/user';
 import { useLogStore } from '@/stores/log';
+import { useRouteStore } from '@/stores/route';
 import Utils from '@/utils';
 
 export default defineComponent({
@@ -107,11 +108,13 @@ export default defineComponent({
     const layoutStore = useLayoutStore();
     const userStore = useUserStore();
     const logStore = useLogStore();
+    const routeStore = useRouteStore();
     return {
       iconSize: ref(20),
       layoutStore,
       userStore,
       logStore,
+      routeStore,
     };
   },
   components: {

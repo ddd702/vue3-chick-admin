@@ -32,7 +32,11 @@
         :filter-method="handleTypeFilter"
       />
       <el-table-column prop="title" label="标题" width="180" />
-      <el-table-column prop="info" label="信息" width="180" />
+      <el-table-column prop="info" label="信息" width="180">
+        <template #default="props">
+          <div v-html="props.row.info"></div>
+        </template>
+      </el-table-column>
       <el-table-column prop="time" width="180" label="时间" />
       <el-table-column prop="url" label="路径" />
     </el-table>

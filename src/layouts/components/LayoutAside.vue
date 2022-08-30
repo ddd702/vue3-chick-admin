@@ -8,7 +8,7 @@
         :router="true"
         :default-active="layoutStore.asideMenuActive"
       >
-        <template v-for="(item, index) in layoutStore.asideMenu" :key="index">
+        <template v-for="item in layoutStore.asideMenu" :key="item.hash">
           <el-sub-menu v-if="item.children" :index="item.hash">
             <template #title>
               <el-icon>
@@ -19,9 +19,9 @@
             <el-menu-item-group>
               <el-menu-item
                 :route="{ path: item2.path || '' }"
-                v-for="(item2, index2) in item.children"
+                v-for="item2 in item.children"
                 :index="item2.hash"
-                :key="index2"
+                :key="item2.hash"
               >
                 <el-icon v-if="item2.icon">
                   <app-icon class="icon-doc" :class="setIcon(item2)" />

@@ -1,7 +1,14 @@
 import cookies from 'js-cookie';
+import Storage from './storage';
 export default {
   isDev: !!(import.meta.env.MODE === 'development'),
   cookies,
+  sleep(num: number): Promise<unknown> {
+    return new Promise((resolve: any) => {
+      setTimeout(() => resolve(), num * 1000);
+    });
+  },
+  storage: new Storage(),
   randStr(num = 8): string {
     function randomString(length: number, chars: string) {
       let result = '';

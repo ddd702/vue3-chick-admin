@@ -57,8 +57,7 @@ NProgress.configure({ easing: 'ease', speed: 500, showSpinner: false });
 // 进度条开始
 router.beforeEach((to, from, next) => {
   logStore.add({
-    info: `路由切换`,
-    moreInfo: `<p>from:${from.fullPath}</p><p>to:${to.fullPath}</p>`,
+    info: `from:${from.fullPath}<br>to:${to.fullPath}`,
     type: LogEnum.Log,
     url: location.href,
     title: '路由切换',

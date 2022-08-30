@@ -5,4 +5,8 @@ describe('My First Test', () => {
     cy.visit('/');
     cy.contains('h1', 'You did it!');
   });
+  it('visits the app root url', () => {
+    cy.visit('#/about');
+    cy.contains('h1', 'You did it!');
+  });
 });
