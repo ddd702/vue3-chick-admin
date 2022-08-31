@@ -1,0 +1,21 @@
+<template>
+  <div class="posts-page">
+    {{ msg }}
+  </div>
+</template>
+
+<script lang="ts">
+export default {
+  meta: {
+    path: '/posts',
+    title: '文章列表',
+    cache: true,
+  },
+  name: 'posts',
+  setup() {
+    return { msg: 'ddd' };
+  },
+};
+</script>
+
+<style></style>

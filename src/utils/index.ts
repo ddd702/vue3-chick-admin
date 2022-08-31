@@ -1,5 +1,6 @@
 import cookies from 'js-cookie';
 import Storage from './storage';
+import { AppEnum } from '@/contants';
 export default {
   isDev: !!(import.meta.env.MODE === 'development'),
   cookies,
@@ -43,6 +44,10 @@ export default {
       document.body.clientWidth;
     return w <= 500;
   },
+  setTitle(title: any = AppEnum.title): void {
+    document.title = title;
+  },
+  isWin: navigator.userAgent.indexOf('Windows') > -1, // s是否是win系统
   goPage(val: string): void {
     console.warn('goPage');
   },

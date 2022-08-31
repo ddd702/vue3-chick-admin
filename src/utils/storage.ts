@@ -1,4 +1,4 @@
-import { StorageEnum } from '@/constants';
+import { StorageEnum } from '@/contants';
 import { useUserStore } from '@/stores/user';
 //根据用户分配不同的存储空间
 export default class Storage {
@@ -39,6 +39,9 @@ export default class Storage {
   }
   set(key: string, val: any, storage = true) {
     console.warn('Storage set', key, val);
+    if (typeof val === 'object') {
+      val = JSON.stringify(val);
+    }
     Object.defineProperty(this.global, key, {
       value: val,
       writable: true,

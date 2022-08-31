@@ -3,7 +3,11 @@
     <LayoutAside />
     <div class="app-right" :class="{ fold: !layoutStore.leftMenuOpen }">
       <LayoutHeader />
-      <RouterView />
+      <RouterView v-slot="{ Component }">
+        <KeepAlive :include="routeStore.keepAlive">
+          <component :is="Component" />
+        </KeepAlive>
+      </RouterView>
     </div>
   </div>
 </template>
@@ -12,7 +16,7 @@ import { RouterView } from 'vue-router';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutAside from './components/LayoutAside.vue';
 import { useLayoutStore } from '@/stores/layout';
-import { hito } from '@/apis/test';
+import { useRouteStore } from '@/stores/route';
 export default {
   components: {
     RouterView,
@@ -21,13 +25,11 @@ export default {
   },
   setup() {
     const layoutStore = useLayoutStore();
+    const routeStore = useRouteStore();
     return {
       layoutStore,
+      routeStore,
     };
-  },
-  async mounted() {
-    const res = await hito();
-    console.warn('hito res', res);
   },
 };
 </script>

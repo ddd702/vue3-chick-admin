@@ -2,7 +2,7 @@
  * 页面交互
  * */
 import { defineStore } from 'pinia';
-import { StorageEnum } from '@/constants';
+import { StorageEnum } from '@/contants';
 import { useRouteStore } from './route';
 import Utils from '@/utils';
 export type MenuItem = {
