@@ -63,12 +63,6 @@ import './styles/iconfont/iconfont.css';
 
   // 进度条开始
   router.beforeEach((to, from, next) => {
-    logStore.add({
-      info: `from:${from.fullPath}<br>to:${to.fullPath}`,
-      type: LogEnum.Log,
-      url: location.href,
-      title: '路由切换',
-    });
     Utils.setTitle(to.meta.title || '我的管理系统');
     routeStore.addCache(to);
     routeStore.setCurrentRoute(to);

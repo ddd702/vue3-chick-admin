@@ -5,7 +5,9 @@
       <LayoutHeader />
       <RouterView v-slot="{ Component }">
         <KeepAlive :include="routeStore.keepAlive">
-          <component :is="Component" />
+          <Transition name="fade">
+            <component :is="Component" />
+          </Transition>
         </KeepAlive>
       </RouterView>
     </div>
@@ -35,6 +37,16 @@ export default {
 </script>
 
 <style lang="scss">
+/* vue transition 动画*/
+.fade-enter-active {
+  transition: opacity 0.25s ease-out;
+}
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-to {
+  opacity: 1;
+}
 .app {
   &-wrapper {
     min-height: 100%;

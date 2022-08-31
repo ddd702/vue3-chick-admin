@@ -1,94 +1,113 @@
 <template>
   <header class="app-header">
-    <span class="t-pointer menu-toggle" @click="toggleMenu">
-      <app-icon
-        class="icon-fold"
-        :size="iconSize"
-        v-if="layoutStore.leftMenuOpen"
-      />
-      <app-icon class="icon-expand" :size="iconSize" v-else />
-    </span>
-    <section class="app-top-menu">
-      <div class="top-icon-item">
-        <el-tooltip content="查看调试日志" placement="bottom-end">
-          <el-badge
-            :hidden="logStore.count <= 0"
-            :value="logStore.count"
-            style="display: flex; padding: 0"
+    <div class="app-header-t">
+      <span class="t-pointer menu-toggle" @click="toggleMenu">
+        <app-icon
+          class="icon-fold"
+          :size="iconSize"
+          v-if="layoutStore.leftMenuOpen"
+        />
+        <app-icon class="icon-expand" :size="iconSize" v-else />
+      </span>
+      <section class="app-top-menu">
+        <div class="top-icon-item">
+          <el-tooltip content="清除系统缓存" placement="bottom-end">
+            <el-popconfirm
+              title="删除本地存储并重载当前页面?"
+              @confirm="clearStorage"
+            >
+              <template #reference>
+                <app-icon class="t-pointer icon-clear" :size="iconSize" />
+              </template>
+            </el-popconfirm>
+          </el-tooltip>
+        </div>
+        <div class="top-icon-item">
+          <el-tooltip content="查看调试日志" placement="bottom-end">
+            <el-badge
+              :hidden="logStore.count <= 0"
+              :value="logStore.count"
+              style="display: flex; padding: 0"
+            >
+              <app-icon
+                class="t-pointer icon-debug"
+                :size="iconSize"
+                @click="openLogDialog"
+              />
+            </el-badge>
+          </el-tooltip>
+        </div>
+        <div class="top-icon-item">
+          <el-tooltip
+            :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
+            placement="bottom-end"
           >
             <app-icon
-              class="t-pointer icon-debug"
+              class="t-pointer"
+              :class="{
+                'icon-zoomout': layoutStore.fullScreen,
+                'icon-zoomin': !layoutStore.fullScreen,
+              }"
               :size="iconSize"
-              @click="openLogDialog"
+              @click="toggleFullScreen"
             />
-          </el-badge>
-        </el-tooltip>
-      </div>
-      <div class="top-icon-item">
-        <el-tooltip
-          :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
-          placement="bottom-end"
-        >
-          <app-icon
-            class="t-pointer"
-            :class="{
-              'icon-zoomout': layoutStore.fullScreen,
-              'icon-zoomin': !layoutStore.fullScreen,
-            }"
-            :size="iconSize"
-            @click="toggleFullScreen"
-          />
-        </el-tooltip>
-      </div>
-      <div class="top-icon-item">
-        <el-tooltip
-          :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
-          placement="bottom-end"
-        >
-          <app-icon
-            class="t-pointer"
-            :class="{
-              'icon-sun': layoutStore.dark,
-              'icon-moon': !layoutStore.dark,
-            }"
-            :size="iconSize"
-            @click="toggleDrak"
-          />
-        </el-tooltip>
-      </div>
-      <el-dropdown trigger="click" class="top-icon-item">
-        <div class="user-cell t-pointer">
-          <el-image class="app-avatar" fit="contain" :src="userStore.avatar" />
-          <span>{{ userStore.userName }}</span>
+          </el-tooltip>
         </div>
-        <template #dropdown>
-          <el-dropdown-menu>
-            <template v-if="userStore.isLogin">
-              <el-dropdown-item>
-                <RouterLink class="t-block" :to="{ path: '/changePsw' }">
-                  修改密码
-                </RouterLink>
-              </el-dropdown-item>
-              <el-dropdown-item @click="handleLoginOut">
-                退出登录
-              </el-dropdown-item>
-            </template>
-            <template v-else>
-              <el-dropdown-item>
-                <RouterLink class="t-block" :to="{ path: '/login' }">
-                  登录/注册
-                </RouterLink>
-              </el-dropdown-item>
-            </template>
-          </el-dropdown-menu>
-          <el-dropdown-item>
-            <RouterLink class="t-block" :to="{ path: '/about' }">
-              关于
-            </RouterLink>
-          </el-dropdown-item>
-        </template>
-      </el-dropdown>
-    </section>
+        <div class="top-icon-item">
+          <el-tooltip
+            :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
+            placement="bottom-end"
+          >
+            <app-icon
+              class="t-pointer"
+              :class="{
+                'icon-sun': layoutStore.dark,
+                'icon-moon': !layoutStore.dark,
+              }"
+              :size="iconSize"
+              @click="toggleDrak"
+            />
+          </el-tooltip>
+        </div>
+        <el-dropdown trigger="click" class="top-icon-item">
+          <div class="user-cell t-pointer">
+            <el-image
+              class="app-avatar"
+              fit="contain"
+              :src="userStore.avatar"
+            />
+            <span>{{ userStore.userName }}</span>
+          </div>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <template v-if="userStore.isLogin">
+                <el-dropdown-item>
+                  <RouterLink class="t-block" :to="{ path: '/changePsw' }">
+                    修改密码
+                  </RouterLink>
+                </el-dropdown-item>
+                <el-dropdown-item @click="handleLoginOut">
+                  退出登录
+                </el-dropdown-item>
+              </template>
+              <template v-else>
+                <el-dropdown-item>
+                  <RouterLink class="t-block" :to="{ path: '/login' }">
+                    登录/注册
+                  </RouterLink>
+                </el-dropdown-item>
+              </template>
+            </el-dropdown-menu>
+            <el-dropdown-item>
+              <RouterLink class="t-block" :to="{ path: '/about' }">
+                关于
+              </RouterLink>
+            </el-dropdown-item>
+          </template>
+        </el-dropdown>
+      </section>
+    </div>
+    <LayoutHistory />
     <LogDialog />
   </header>
 </template>
@@ -97,6 +116,7 @@
 import { defineComponent, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import LogDialog from './LogDialog.vue';
+import LayoutHistory from './LayoutHistory.vue';
 import { useLayoutStore } from '@/stores/layout';
 import { useUserStore } from '@/stores/user';
 import { useLogStore } from '@/stores/log';
@@ -119,6 +139,7 @@ export default defineComponent({
   },
   components: {
     RouterLink,
+    LayoutHistory,
     LogDialog,
   },
   mounted() {
@@ -128,6 +149,10 @@ export default defineComponent({
     });
   },
   methods: {
+    clearStorage() {
+      Utils.storage.clearStorage();
+      location.reload();
+    },
     handleLoginOut() {
       console.warn('handleLoginOut');
     },
@@ -156,11 +181,13 @@ export default defineComponent({
     padding-right: 2vw;
     background-color: var(--header-bg-color, #fff);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;
-    @include flexCenter();
-    height: var(--header-height, 70px);
     .menu-toggle {
       margin-left: 2vw;
     }
+  }
+  &-header-t {
+    @include flexCenter();
+    height: var(--header-height, 70px);
   }
   &-top-menu {
     justify-content: flex-end;

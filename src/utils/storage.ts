@@ -59,4 +59,13 @@ export default class Storage {
       localStorage.setItem(StorageEnum.global, saveVal);
     }
   }
+  clearStorage() {
+    this.updateUserId();
+    const localData: any = this.getLocalItem();
+    if (localData[this.userId]) {
+      delete localData[this.userId];
+    }
+    const saveVal = JSON.stringify(localData);
+    localStorage.setItem(StorageEnum.global, saveVal);
+  }
 }

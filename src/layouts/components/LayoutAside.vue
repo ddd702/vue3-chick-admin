@@ -82,6 +82,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+.el-menu--collapse {
+  width: 100% !important;
+}
 .app {
   &-logo {
     background-image: var(--logo-bg, transparent);

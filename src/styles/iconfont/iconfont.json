@@ -6,6 +6,104 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "752577",
+      "name": "Clearup",
+      "font_class": "clear",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "34923",
+      "name": "lock",
+      "font_class": "lock",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "15838546",
+      "name": "unlock",
+      "font_class": "unlock",
+      "unicode": "e682",
+      "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "31543115",
+      "name": "驳回",
+      "font_class": "bohui",
+      "unicode": "e6d6",
+      "unicode_decimal": 59094
+    },
+    {
+      "icon_id": "31543116",
+      "name": "打印",
+      "font_class": "dayin",
+      "unicode": "e6d7",
+      "unicode_decimal": 59095
+    },
+    {
+      "icon_id": "31543119",
+      "name": "勾",
+      "font_class": "gou",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "31543123",
+      "name": "高级搜索",
+      "font_class": "gaojisousuo",
+      "unicode": "e6d9",
+      "unicode_decimal": 59097
+    },
+    {
+      "icon_id": "31543129",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e6da",
+      "unicode_decimal": 59098
+    },
+    {
+      "icon_id": "31543132",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "31543138",
+      "name": "客服",
+      "font_class": "kefu",
+      "unicode": "e6dc",
+      "unicode_decimal": 59100
+    },
+    {
+      "icon_id": "31543154",
+      "name": "提示",
+      "font_class": "tishi",
+      "unicode": "e6dd",
+      "unicode_decimal": 59101
+    },
+    {
+      "icon_id": "31570679",
+      "name": "餐饮",
+      "font_class": "canyin",
+      "unicode": "e6df",
+      "unicode_decimal": 59103
+    },
+    {
+      "icon_id": "31570689",
+      "name": "通讯",
+      "font_class": "tongxun",
+      "unicode": "e6e0",
+      "unicode_decimal": 59104
+    },
+    {
+      "icon_id": "31570691",
+      "name": "总金额",
+      "font_class": "zongjine",
+      "unicode": "e6e1",
+      "unicode_decimal": 59105
+    },
+    {
       "icon_id": "1115014",
       "name": "debug",
       "font_class": "debug",
@@ -214,13 +312,6 @@
       "font_class": "list",
       "unicode": "e629",
       "unicode_decimal": 58921
-    },
-    {
-      "icon_id": "31425962",
-      "name": "解锁",
-      "font_class": "unlock",
-      "unicode": "e62a",
-      "unicode_decimal": 58922
     },
     {
       "icon_id": "31425963",
@@ -433,13 +524,6 @@
       "unicode_decimal": 58953
     },
     {
-      "icon_id": "31425994",
-      "name": "修改密码",
-      "font_class": "lock",
-      "unicode": "e64a",
-      "unicode_decimal": 58954
-    },
-    {
       "icon_id": "31425995",
       "name": "用户管理",
       "font_class": "users",
@@ -466,13 +550,6 @@
       "font_class": "setting",
       "unicode": "e650",
       "unicode_decimal": 58960
-    },
-    {
-      "icon_id": "31426003",
-      "name": "重置密码",
-      "font_class": "reset",
-      "unicode": "e653",
-      "unicode_decimal": 58963
     },
     {
       "icon_id": "31426004",

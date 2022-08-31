@@ -16,7 +16,7 @@ export type RouteMiniType = {
   name?: any;
   params?: object;
   query?: object;
-  meta?: object;
+  meta?: any;
 };
 export type CacheType = {
   route: RouteMiniType;
@@ -25,7 +25,7 @@ export type CacheType = {
 type StateType = {
   allRoutes: RouteRecordNormalized[] | [];
   currentRoute: RouteLocationNormalized | null;
-  cache: Array<CacheType> | [];
+  cache: Array<CacheType>;
 };
 export const useRouteStore = defineStore({
   id: 'route',
@@ -62,6 +62,10 @@ export const useRouteStore = defineStore({
     setCurrentRoute(val: RouteLocationNormalized): void {
       this.currentRoute = val;
     },
+    delCache(index: number): void {
+      this.cache.splice(index, 1);
+      Utils.storage.set(StorageEnum.routeCache, this.cache);
+    },
     addCache(routeArg: RouteLocationNormalized): void {
       const { fullPath, path, name, meta, params, query } = routeArg;
       const item: CacheType = {
@@ -72,13 +76,16 @@ export const useRouteStore = defineStore({
         //注意，设置了meta.title的路由才记录
         return;
       }
-      //查一次原数组是否有此路径，有的话删除
+      //查一次原数组是否有此路径，有的话不做操作
       const delIndex = this.cache.findIndex((n) => n.route.path === path);
-      delIndex >= 0 && this.cache.splice(delIndex, 1);
-      if (this.cache.length >= maxLen) {
-        this.cache.pop();
+      // delIndex >= 0 && this.cache.splice(delIndex, 1);
+      if (delIndex >= 0) {
+        return;
       }
-      this.cache = [item].concat(this.cache);
+      if (this.cache.length >= maxLen) {
+        this.cache.shift();
+      }
+      this.cache.push(item);
       Utils.storage.set(StorageEnum.routeCache, this.cache);
     },
   },

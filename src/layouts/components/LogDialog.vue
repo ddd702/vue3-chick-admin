@@ -1,5 +1,11 @@
 <template>
-  <el-dialog append-to-body v-model="logStore.visible" title="日志" width="95%">
+  <el-dialog
+    draggable
+    append-to-body
+    v-model="logStore.visible"
+    title="日志"
+    width="85%"
+  >
     <div class="dialog-header">
       <el-button type="danger" round @click="handleClear">
         <app-icon class="icon-delete" />
