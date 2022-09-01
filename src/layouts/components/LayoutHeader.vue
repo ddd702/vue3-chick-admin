@@ -176,11 +176,11 @@ export default defineComponent({
     position: sticky;
     top: 0;
     z-index: 1;
-    padding-right: 2vw;
+    padding-right: 15px;
     background-color: var(--ck-header-bg-color, #fff);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;
     .menu-toggle {
-      margin-left: 2vw;
+      margin-left: 15px;
     }
   }
   &-header-t {

@@ -13,3 +13,11 @@ defineProps<{
   >
   </span>
 </template>
+<style lang="scss">
+.iconfont {
+  transition: opacity 0.2s ease-out;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+</style>

@@ -7,7 +7,7 @@
         :key="tag.time"
         @close="deleteTag(index)"
         :round="true"
-        size="default"
+        size="large"
         class="ck-nav-history-item"
         closable
         :disable-transitions="true"
@@ -22,6 +22,25 @@
       </el-tag>
       <!-- </div> -->
     </el-scrollbar>
+    <div class="ck-nav-menu">
+      <el-dropdown trigger="click">
+        <app-icon size="20" class="icon-more-a t-pointer" />
+        <template #dropdown>
+          <el-dropdown-item @click="handleMenu('home')">
+            <app-icon size="14" class="icon-home" /><span
+              class="ck-nav-menu-text"
+              >跳去首页</span
+            >
+          </el-dropdown-item>
+          <el-dropdown-item @click="handleMenu('close')">
+            <app-icon size="14" class="icon-close" /><span
+              class="ck-nav-menu-text"
+              >关闭其他</span
+            >
+          </el-dropdown-item>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -58,6 +77,9 @@ export default defineComponent({
       }
       this.routeStore.delCache(index);
     },
+    handleMenu(type = 'home') {
+      console.warn('handleMenu', type);
+    },
   },
 });
 </script>
@@ -65,12 +87,20 @@ export default defineComponent({
 <style lang="scss">
 .ck-nav-history {
   color: #fff;
+  @include flexCenter();
+  justify-content: space-between;
   padding-bottom: 5px;
   &-item {
     margin: 0 5px;
   }
   a {
     color: #fff;
+  }
+}
+.ck-nav-menu {
+  @include flexCenter();
+  &-text {
+    padding-left: 5px;
   }
 }
 </style>
