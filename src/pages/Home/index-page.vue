@@ -1,7 +1,8 @@
 <template>
-  <div class="home-page">
+  <ck-page footer header>
     {{ msg }}
-  </div>
+    <template #footer> footer </template>
+  </ck-page>
 </template>
 
 <script lang="ts">

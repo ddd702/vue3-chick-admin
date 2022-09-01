@@ -15,11 +15,12 @@
 </template>
 <script lang="ts">
 import { RouterView } from 'vue-router';
+import { defineComponent } from 'vue';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutAside from './components/LayoutAside.vue';
 import { useLayoutStore } from '@/stores/layout';
 import { useRouteStore } from '@/stores/route';
-export default {
+export default defineComponent({
   components: {
     RouterView,
     LayoutHeader,
@@ -33,7 +34,7 @@ export default {
       routeStore,
     };
   },
-};
+});
 </script>
 
 <style lang="scss">

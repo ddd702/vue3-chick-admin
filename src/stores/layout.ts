@@ -50,10 +50,10 @@ export const useLayoutStore = defineStore({
         return;
       }
       // 根据路径更新active的index
-      const { fullPath } = route;
+      const { path } = route;
       let outIndex = '';
       const findIndex = (item: any, index: number) => {
-        if (item.path === fullPath) {
+        if (item.path === path) {
           outIndex = item.hash;
           return;
         }

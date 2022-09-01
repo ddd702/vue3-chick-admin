@@ -8,39 +8,7 @@
         :router="true"
         :default-active="layoutStore.asideMenuActive"
       >
-        <template v-for="item in layoutStore.asideMenu" :key="item.hash">
-          <el-sub-menu v-if="item.children" :index="item.hash">
-            <template #title>
-              <el-icon>
-                <ck-icon class="icon-doc" :class="setIcon(item)" />
-              </el-icon>
-              <span>{{ item.title }}</span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item
-                :route="{ path: item2.path || '' }"
-                v-for="item2 in item.children"
-                :index="item2.hash"
-                :key="item2.hash"
-              >
-                <el-icon v-if="item2.icon">
-                  <ck-icon class="icon-doc" :class="setIcon(item2)" />
-                </el-icon>
-                <template #title>{{ item2.title }}</template>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-sub-menu>
-          <el-menu-item
-            v-else
-            :route="{ path: item.path || '' }"
-            :index="item.hash"
-          >
-            <el-icon>
-              <ck-icon class="icon-doc" :class="setIcon(item)" />
-            </el-icon>
-            <template #title>{{ item.title }}</template>
-          </el-menu-item>
-        </template>
+        <AsideMenuItem :menus="layoutStore.asideMenu" />
       </el-menu>
       <el-empty
         :image-size="layoutStore.leftMenuOpen ? 100 : 50"
@@ -53,11 +21,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { MenuItem } from '@/stores/layout';
 import { useLayoutStore } from '@/stores/layout';
 import { getDataByCode } from '@/apis/sys';
-
+import AsideMenuItem from './AsideMenuItem.vue';
 export default defineComponent({
+  components: { AsideMenuItem },
   setup(): any {
     const layoutStore = useLayoutStore();
     return {
@@ -71,11 +39,6 @@ export default defineComponent({
     async fetchData() {
       const res = await getDataByCode({ code: 'clay-menu' });
       this.layoutStore.setAsideMenu(JSON.parse(res.data));
-    },
-    setIcon(item: MenuItem): object {
-      const outClass: any = {};
-      outClass[`icon-${item.icon}`] = true;
-      return outClass;
     },
   },
 });
