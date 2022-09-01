@@ -12,7 +12,7 @@
           <el-sub-menu v-if="item.children" :index="item.hash">
             <template #title>
               <el-icon>
-                <app-icon class="icon-doc" :class="setIcon(item)" />
+                <ck-icon class="icon-doc" :class="setIcon(item)" />
               </el-icon>
               <span>{{ item.title }}</span>
             </template>
@@ -24,7 +24,7 @@
                 :key="item2.hash"
               >
                 <el-icon v-if="item2.icon">
-                  <app-icon class="icon-doc" :class="setIcon(item2)" />
+                  <ck-icon class="icon-doc" :class="setIcon(item2)" />
                 </el-icon>
                 <template #title>{{ item2.title }}</template>
               </el-menu-item>
@@ -36,7 +36,7 @@
             :index="item.hash"
           >
             <el-icon>
-              <app-icon class="icon-doc" :class="setIcon(item)" />
+              <ck-icon class="icon-doc" :class="setIcon(item)" />
             </el-icon>
             <template #title>{{ item.title }}</template>
           </el-menu-item>

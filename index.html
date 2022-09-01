@@ -7,9 +7,9 @@
     <title><%- title %></title>
     <style type="text/css">
       @media (prefers-color-scheme: dark) {
-        .app-empty   { background:  #333; color: white; }
+        .ck-empty   { background:  #333; color: white; }
       }
-      .app-empty{
+      .ck-empty{
         position: absolute;
         top: 0; 
         left:0;
@@ -21,11 +21,11 @@
         justify-content: center;
         flex-direction: column;
       }
-      .app-empty-loading{
+      .ck-empty-loading{
         width:10%;
         max-width: 30px;
       }
-      .app-empty-text{
+      .ck-empty-text{
         font-size: 14px;
         margin:30px 0;
       }
@@ -38,9 +38,9 @@
       </strong>
     </noscript>
     <div id="app">
-      <div class="app-empty">
-        <img class="app-empty-loading" src="/image/loading-spin.svg"/>
-        <p class="app-empty-text">正在加载系统资源</p>
+      <div class="ck-empty">
+        <img class="ck-empty-loading" src="/image/loading-spin.svg"/>
+        <p class="ck-empty-text">正在加载系统资源</p>
       </div>
     </div>
     <%- injectScript %>

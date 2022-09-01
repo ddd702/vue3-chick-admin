@@ -2,12 +2,12 @@
   <header class="ck-header">
     <div class="ck-header-t">
       <span class="t-pointer menu-toggle" @click="toggleMenu">
-        <app-icon
+        <ck-icon
           class="icon-fold"
           :size="iconSize"
           v-if="layoutStore.leftMenuOpen"
         />
-        <app-icon class="icon-expand" :size="iconSize" v-else />
+        <ck-icon class="icon-expand" :size="iconSize" v-else />
       </span>
       <section class="ck-top-menu">
         <div class="top-icon-item">
@@ -18,7 +18,7 @@
                 @confirm="clearStorage"
               >
                 <template #reference>
-                  <app-icon class="t-pointer icon-clear" :size="iconSize" />
+                  <ck-icon class="t-pointer icon-clear" :size="iconSize" />
                 </template>
               </el-popconfirm>
             </span>
@@ -31,7 +31,7 @@
               :value="logStore.count"
               style="display: flex; padding: 0"
             >
-              <app-icon
+              <ck-icon
                 class="t-pointer icon-debug"
                 :size="iconSize"
                 @click="openLogDialog"
@@ -44,7 +44,7 @@
             :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
             placement="bottom-end"
           >
-            <app-icon
+            <ck-icon
               class="t-pointer"
               :class="{
                 'icon-zoomout': layoutStore.fullScreen,
@@ -60,11 +60,11 @@
             :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
             placement="bottom-end"
           >
-            <app-icon
+            <ck-icon
               class="t-pointer"
               :class="{
-                'icon-sun': layoutStore.dark,
-                'icon-moon': !layoutStore.dark,
+                'icon-moon': layoutStore.dark,
+                'icon-sun': !layoutStore.dark,
               }"
               :size="iconSize"
               @click="toggleDrak"

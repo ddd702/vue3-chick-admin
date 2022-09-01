@@ -1,7 +1,7 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
-import AppIcon from '@/components/AppIcon.vue';
+import CkIcon from '@/components/CkIcon.vue';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 //引入 nprogress
 import NProgress from 'nprogress'; // 进度条
@@ -33,7 +33,7 @@ import './styles/iconfont/iconfont.css';
   });
 
   //注册全局组件
-  app.component('AppIcon', AppIcon);
+  app.component('CkIcon', CkIcon);
   app.mount('#app');
   //app.use(createPinia()) 后才能初始化store
   const layoutStore = useLayoutStore();

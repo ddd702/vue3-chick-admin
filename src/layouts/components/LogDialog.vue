@@ -8,7 +8,7 @@
   >
     <div class="dialog-header">
       <el-button type="danger" round @click="handleClear">
-        <app-icon class="icon-delete" />
+        <ck-icon class="icon-delete" />
         清空
       </el-button>
     </div>

@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router';
 </script>
 
 <template>
-  <div class="app-not-found">
+  <div class="ck-not-found">
     <el-image
       src="https://cdn.zcxnb.cn/cloud/2022/06/02/MwqjWu8O_404.png"
     ></el-image>
@@ -17,7 +17,7 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style lang="scss">
-.app-not-found {
+.ck-not-found {
   width: 100%;
   text-align: center;
 }

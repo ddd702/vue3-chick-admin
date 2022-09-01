@@ -24,16 +24,16 @@
     </el-scrollbar>
     <div class="ck-nav-menu">
       <el-dropdown trigger="click">
-        <app-icon size="20" class="icon-more-a t-pointer" />
+        <ck-icon size="20" class="icon-more-a t-pointer" />
         <template #dropdown>
           <el-dropdown-item @click="handleMenu('home')">
-            <app-icon size="14" class="icon-home" /><span
+            <ck-icon size="14" class="icon-home" /><span
               class="ck-nav-menu-text"
               >跳去首页</span
             >
           </el-dropdown-item>
           <el-dropdown-item @click="handleMenu('close')">
-            <app-icon size="14" class="icon-close" /><span
+            <ck-icon size="14" class="icon-close" /><span
               class="ck-nav-menu-text"
               >关闭其他</span
             >
