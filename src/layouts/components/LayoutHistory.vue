@@ -78,7 +78,14 @@ export default defineComponent({
       this.routeStore.delCache(index);
     },
     handleMenu(type = 'home') {
-      console.warn('handleMenu', type);
+      switch (type) {
+        case 'home':
+          this.$router.push({ path: '/' });
+          break;
+        case 'close':
+          this.routeStore.closeOtherCache();
+          break;
+      }
     },
   },
 });
@@ -90,6 +97,7 @@ export default defineComponent({
   @include flexCenter();
   justify-content: space-between;
   padding-bottom: 5px;
+  padding-left: 10px;
   &-item {
     margin: 0 5px;
   }

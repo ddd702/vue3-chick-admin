@@ -51,6 +51,11 @@ export const useRouteStore = defineStore({
       });
       return out;
     },
+    nowCacheIndex(state): number {
+      return state.cache.findIndex(
+        (n) => n.route.path === state?.currentRoute?.path
+      );
+    },
   },
   actions: {
     clearCache(): void {
@@ -61,6 +66,11 @@ export const useRouteStore = defineStore({
     },
     setCurrentRoute(val: RouteLocationNormalized): void {
       this.currentRoute = val;
+    },
+    closeOtherCache(): void {
+      //删除当前外的其他缓存路径
+      const { nowCacheIndex } = this;
+      this.cache = [this.cache[nowCacheIndex]];
     },
     delCache(index: number): void {
       this.cache.splice(index, 1);

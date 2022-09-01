@@ -104,9 +104,7 @@ export default defineComponent({
     height: 100%;
     padding: 10px 0;
     overflow-y: auto;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
-      rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-    // border-right: 1px solid var(--aside-r-border-color,#ddd);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     z-index: 2;
     width: var(--ck-header-left-width);
     background-color: var(--ck-aside-bg-color, #fff);
