@@ -1,5 +1,6 @@
 
-:root {
+html {
+  --ck-wrapper-bg-image:none;
   --ck-main-text-color:#333;
   --ck-header-bg-color:rgb(255, 255, 255);
   --ck-aside-bg-color:#fefefe;
@@ -14,19 +15,21 @@
   --ck-logo-width:150px;
   --ck-avatar-width: 35px;
   --ck-scroll-bar-width:6px;
-  --ck-scroll-bar-color:rgb(221, 180, 148);
+  --ck-scroll-bar-color:#ddd;
+  --ck-a-color:#777;
 }
 .dark{
   --ck-main-text-color:#eee;
+  --ck-a-color:#efefef;
   --ck-main-bg-color:#333;
   --ck-header-bg-color:rgb(32, 29, 44);
   --ck-scroll-bar-color:rgb(91, 81, 73);
   --ck-aside-bg-color:#222;
-  --ck-scroll-bar-body-bg:var(--ck-header-bg-color);
+  --ck-scroll-bar-body-bg:rgb(32, 29, 44);
   // --aside-r-border-color:rgb(32, 29, 44);
 }
 @media (max-width: 500px) {
-  :root {
+  html {
     --ck-scroll-bar-width:3px;
   }
 }
@@ -38,6 +41,7 @@
   position: relative;
   font-weight: normal;
 }
+
 .win-scrollbar{
   div,body {
     &::-webkit-scrollbar{
@@ -45,7 +49,7 @@
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--ck-scroll-bar-color,10px);
+      background-color: var(--ck-scroll-bar-color,#ddd);
     }
     &::-webkit-scrollbar-track{
       background-color:transparent;
@@ -54,7 +58,7 @@
   }
   body {
     &::-webkit-scrollbar-track{
-      background-color:var(--ck-scroll-bar-body-bg,#ddd);
+      background-color:var(--ck-scroll-bar-body-bg,#fff);
     }
   }
 }

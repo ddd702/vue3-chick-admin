@@ -1,6 +1,7 @@
 <template>
   <ck-page footer header>
     {{ msg }}
+    <div style="height: 1000px"></div>
     <template #footer> footer </template>
   </ck-page>
 </template>

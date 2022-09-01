@@ -41,7 +41,7 @@ export default defineConfig(({ command, mode }) => {
           },
         },
       }),
-      visualizer(),
+      // visualizer(),
     ],
     css: {
       /* CSS 预处理器 */

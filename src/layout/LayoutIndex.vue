@@ -1,8 +1,9 @@
 <template>
-  <div class="ck-wrapper t-flex">
-    <LayoutAside />
-    <div class="ck-right" :class="{ fold: !layoutStore.leftMenuOpen }">
-      <LayoutHeader />
+  <LayoutAside />
+  <div class="ck-wrapper" key="" :class="{ fold: !layoutStore.leftMenuOpen }">
+    <!-- <div class="ck-right" > -->
+    <LayoutHeader />
+    <div class="ck-container">
       <RouterView v-slot="{ Component }">
         <KeepAlive :include="routeStore.keepAlive">
           <Transition name="fade">
@@ -11,6 +12,7 @@
         </KeepAlive>
       </RouterView>
     </div>
+    <!-- </div> -->
   </div>
 </template>
 <script lang="ts">
@@ -50,20 +52,40 @@ export default defineComponent({
 }
 .ck {
   &-wrapper {
-    min-height: 100%;
-  }
-  &-right {
     width: 100%;
+    min-height: 100%;
     transition: padding 0.5s;
+    background-image: var(--ck-wrapper-bg-image, none);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
     padding-left: var(--ck-header-left-width);
     &.fold {
       padding-left: var(--ck-header-left-width-fold);
     }
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--ck-page-bg-color);
+      display: block;
+      z-index: 0;
+      content: '';
+    }
+  }
+  &-container {
+    min-height: calc(100% - 90px);
+    position: relative;
+    padding: 1vw;
+    z-index: 1;
   }
 }
 @media (max-width: 500px) {
   .ck {
-    &-right {
+    &-wrapper {
       &.fold {
         padding-left: 0;
       }

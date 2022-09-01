@@ -1,5 +1,5 @@
 <template>
-  <header class="ck-header">
+  <header class="ck-header" :class="{ fold: !layoutStore.leftMenuOpen }">
     <div class="ck-header-t">
       <span class="t-pointer menu-toggle" @click="toggleMenu">
         <ck-icon
@@ -40,18 +40,11 @@
           </el-tooltip>
         </div>
         <div class="top-icon-item">
-          <el-tooltip
-            :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
-            placement="bottom-end"
-          >
+          <el-tooltip content="主题" placement="bottom-end">
             <ck-icon
-              class="t-pointer"
-              :class="{
-                'icon-zoomout': layoutStore.fullScreen,
-                'icon-zoomin': !layoutStore.fullScreen,
-              }"
+              class="t-pointer icon-skin"
               :size="iconSize"
-              @click="toggleFullScreen"
+              @click="openTheme"
             />
           </el-tooltip>
         </div>
@@ -68,6 +61,22 @@
               }"
               :size="iconSize"
               @click="toggleDrak"
+            />
+          </el-tooltip>
+        </div>
+        <div class="top-icon-item">
+          <el-tooltip
+            :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
+            placement="bottom-end"
+          >
+            <ck-icon
+              class="t-pointer"
+              :class="{
+                'icon-zoomout': layoutStore.fullScreen,
+                'icon-zoomin': !layoutStore.fullScreen,
+              }"
+              :size="iconSize"
+              @click="toggleFullScreen"
             />
           </el-tooltip>
         </div>
@@ -107,6 +116,7 @@
     </div>
     <LayoutHistory v-if="routeStore.cache.length" />
     <LogDialog />
+    <ThemeDialog />
   </header>
 </template>
 
@@ -115,6 +125,7 @@ import { defineComponent, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import LogDialog from './LogDialog.vue';
 import LayoutHistory from './LayoutHistory.vue';
+import ThemeDialog from './ThemeDialog.vue';
 import { useLayoutStore } from '@/stores/layout';
 import { useUserStore } from '@/stores/user';
 import { useLogStore } from '@/stores/log';
@@ -139,6 +150,7 @@ export default defineComponent({
     RouterLink,
     LayoutHistory,
     LogDialog,
+    ThemeDialog,
   },
   mounted() {
     document.addEventListener('fullscreenchange', () => {
@@ -147,6 +159,10 @@ export default defineComponent({
     });
   },
   methods: {
+    openTheme() {
+      //打开主题弹框
+      this.layoutStore.openThemeDialog();
+    },
     clearStorage() {
       Utils.storage.clearStorage();
       location.reload();
@@ -175,7 +191,7 @@ export default defineComponent({
   &-header {
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     padding-right: 15px;
     background-color: var(--ck-header-bg-color, #fff);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;

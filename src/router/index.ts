@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import LayoutIndex from '@/layouts/LayoutIndex.vue';
+import LayoutIndex from '@/layout/LayoutIndex.vue';
 
 async function setRouter() {
   const generateRoutes: any = [];

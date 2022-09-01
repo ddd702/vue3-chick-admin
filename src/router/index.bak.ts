@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
-import LayoutIndex from '@/layouts/LayoutIndex.vue';
+import LayoutIndex from '@/layout/LayoutIndex.vue';
 //批量导入vue组件，懒人操作
 const Pages = import.meta.glob(['../pages/**/*.page.vue']);
 const generateRoutes: any = [];

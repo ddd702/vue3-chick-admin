@@ -1,11 +1,13 @@
 @import './base.scss';
+@import './theme/acg.scss';
+@import './theme/yuanshen.scss';
 html{
   height: 100%;
 }
 body {
   height: 100%;
   color: var(--ck-main-text-color,#000);
-  background: var(--ck-main-bg-color,#fff);
+  background-color: var(--ck-main-bg-color,#fff);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
@@ -15,10 +17,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-a,
-.green {
+#app{
+  height: 100%;
+}
+a{
   text-decoration: none;
   // color: #5f9f5f;
+  color:var(--ck-a-color,#777);
   transition: 0.4s;
 }
 /*工具类样式*/
@@ -32,4 +37,7 @@ a,
 }
 .t-flex{
   display: flex;
+}
+.t-flex-wrap{
+  flex-wrap: wrap;
 }

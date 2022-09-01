@@ -9,7 +9,7 @@
         :round="true"
         size="large"
         class="ck-nav-history-item"
-        closable
+        :closable="tag.route.path !== '/'"
         :disable-transitions="true"
         effect="dark"
         :type="
@@ -60,6 +60,10 @@ export default defineComponent({
   },
   methods: {
     deleteTag(index: number) {
+      if (this.routeStore.currentRoute?.path === '/') {
+        //首页不能删除
+        return;
+      }
       const cacheCount = this.routeStore.cacheCount;
       if (
         this.routeStore.cache[index].route.path ===
@@ -96,7 +100,7 @@ export default defineComponent({
   color: #fff;
   @include flexCenter();
   justify-content: space-between;
-  padding-bottom: 5px;
+  padding-bottom: 8px;
   padding-left: 10px;
   &-item {
     margin: 0 5px;

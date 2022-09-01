@@ -32,7 +32,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
-.ck-page {
-}
-</style>
+<style lang="scss"></style>

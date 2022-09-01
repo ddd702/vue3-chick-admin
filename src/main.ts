@@ -17,6 +17,9 @@ import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import './styles/app.scss';
 import './styles/iconfont/iconfont.css';
+// if(true){
+//   document.querySelector('html')?.classList.add('ck-theme-acg');
+// }
 (async () => {
   // 这里为啥要用async 我有必要说下：
   // 因为自动生成router的原因，是个异步操作获取相关信息
@@ -26,8 +29,8 @@ import './styles/iconfont/iconfont.css';
   app.use(createPinia());
 
   const router = await setRouter();
+  (window as any).CkRouter = router;
   app.use(router);
-  console.warn('router', router.getRoutes());
 
   app.use(ElementPlus, {
     locale: zhCn,
@@ -80,9 +83,9 @@ import './styles/iconfont/iconfont.css';
   /** 设置暗黑还是浅色模式
    * 设置win滚动条
    */
-  if (Utils.isWin) {
+  if (Utils.notMac) {
     document.querySelector('html')?.classList.add('win-scrollbar');
   }
-
+  layoutStore.setTheme(undefined);
   layoutStore.updateDark();
 })();

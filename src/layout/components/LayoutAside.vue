@@ -76,6 +76,10 @@ export default defineComponent({
     &-menu {
       width: 100%;
     }
+    &-inner {
+      width: 100%;
+      overflow-x: hidden;
+    }
     &.fold {
       width: var(--ck-header-left-width-fold);
       .ck-logo {
