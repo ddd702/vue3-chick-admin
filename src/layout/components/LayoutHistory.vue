@@ -60,7 +60,7 @@ export default defineComponent({
   },
   methods: {
     deleteTag(index: number) {
-      if (this.routeStore.currentRoute?.path === '/') {
+      if (this.routeStore.cache[index].route.path === '/') {
         //首页不能删除
         return;
       }
