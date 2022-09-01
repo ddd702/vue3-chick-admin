@@ -84,6 +84,14 @@ export const useLayoutStore = defineStore({
     switchDark(): void {
       this.dark = !this.dark;
       Utils.storage.set(StorageEnum.dark, this.dark ? '1' : '0');
+      this.updateDark();
+    },
+    updateDark(): void {
+      if (this.dark) {
+        document.querySelector('html')?.classList.add('dark');
+      } else {
+        document.querySelector('html')?.classList.remove('dark');
+      }
     },
   },
 });

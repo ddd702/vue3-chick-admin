@@ -1,6 +1,6 @@
 <template>
-  <header class="app-header">
-    <div class="app-header-t">
+  <header class="ck-header">
+    <div class="ck-header-t">
       <span class="t-pointer menu-toggle" @click="toggleMenu">
         <app-icon
           class="icon-fold"
@@ -9,17 +9,19 @@
         />
         <app-icon class="icon-expand" :size="iconSize" v-else />
       </span>
-      <section class="app-top-menu">
+      <section class="ck-top-menu">
         <div class="top-icon-item">
           <el-tooltip content="清除系统缓存" placement="bottom-end">
-            <el-popconfirm
-              title="删除本地存储并重载当前页面?"
-              @confirm="clearStorage"
-            >
-              <template #reference>
-                <app-icon class="t-pointer icon-clear" :size="iconSize" />
-              </template>
-            </el-popconfirm>
+            <span>
+              <el-popconfirm
+                title="删除本地存储并重载当前页面?"
+                @confirm="clearStorage"
+              >
+                <template #reference>
+                  <app-icon class="t-pointer icon-clear" :size="iconSize" />
+                </template>
+              </el-popconfirm>
+            </span>
           </el-tooltip>
         </div>
         <div class="top-icon-item">
@@ -71,11 +73,7 @@
         </div>
         <el-dropdown trigger="click" class="top-icon-item">
           <div class="user-cell t-pointer">
-            <el-image
-              class="app-avatar"
-              fit="contain"
-              :src="userStore.avatar"
-            />
+            <el-image class="ck-avatar" fit="contain" :src="userStore.avatar" />
             <span>{{ userStore.userName }}</span>
           </div>
           <template #dropdown>
@@ -107,7 +105,7 @@
         </el-dropdown>
       </section>
     </div>
-    <LayoutHistory />
+    <LayoutHistory v-if="routeStore.cache.length" />
     <LogDialog />
   </header>
 </template>
@@ -173,13 +171,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.app {
+.ck {
   &-header {
     position: sticky;
     top: 0;
     z-index: 1;
     padding-right: 2vw;
-    background-color: var(--header-bg-color, #fff);
+    background-color: var(--ck-header-bg-color, #fff);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;
     .menu-toggle {
       margin-left: 2vw;
@@ -187,7 +185,7 @@ export default defineComponent({
   }
   &-header-t {
     @include flexCenter();
-    height: var(--header-height, 70px);
+    height: var(--ck-header-height, 70px);
   }
   &-top-menu {
     justify-content: flex-end;
@@ -211,12 +209,12 @@ export default defineComponent({
     }
   }
   &-avatar {
-    width: var(--avatar-width, 40px);
+    width: var(--ck-avatar-width, 40px);
     border-radius: 50%;
   }
 }
 .dark {
-  .app-header {
+  .ck-header {
     --el-text-color-regular: #ddd;
   }
 }

@@ -35,7 +35,6 @@ import './styles/iconfont/iconfont.css';
   //注册全局组件
   app.component('AppIcon', AppIcon);
   app.mount('#app');
-
   //app.use(createPinia()) 后才能初始化store
   const layoutStore = useLayoutStore();
   const logStore = useLogStore();
@@ -79,22 +78,9 @@ import './styles/iconfont/iconfont.css';
   /** 设置暗黑还是浅色模式
    * 设置win滚动条
    */
+  if (Utils.isWin) {
+    document.querySelector('html')?.classList.add('win-scrollbar');
+  }
 
-  const setThemeMode = () => {
-    if (Utils.isWin) {
-      document.querySelector('html')?.classList.add('win-scrollbar');
-    }
-    if (layoutStore.dark) {
-      document.querySelector('html')?.classList.add('dark');
-    } else {
-      document.querySelector('html')?.classList.remove('dark');
-    }
-  };
-  setThemeMode();
-  layoutStore.$subscribe((mutation) => {
-    const events: any = mutation.events;
-    if (events.key === 'dark') {
-      setThemeMode();
-    }
-  });
+  layoutStore.updateDark();
 })();

@@ -1,33 +1,33 @@
 
 :root {
-  --main-bg-color:#fff;
-  --main-text-color:#333;
-  --header-bg-color:rgb(255, 255, 255);
-  --aside-bg-color:#fefefe;
-  --header-height:50px;
-  --logo-bg:url(https://cdn.zcxnb.cn/cloud/2022/08/25/zbStaGNY_admin-logo.png);
-  --logo-bg-fold:url(https://cdn.zcxnb.cn/cloud/2022/08/25/XGw6u63h_admin-minilogo.png);
-  --logo-width-fold:50px;
-  --logo-height-fold:50px;
-  --logo-height:50px;
-  --header-left-width:220px;
-  --header-left-width-fold:70px;
-  --logo-width:150px;
-  --scroll-bar-width:6px;
-  --scroll-bar-color:rgb(221, 180, 148);
+  --ck-main-text-color:#333;
+  --ck-header-bg-color:rgb(255, 255, 255);
+  --ck-aside-bg-color:#fefefe;
+  --ck-header-height:50px;
+  --ck-logo-bg:url(https://cdn.zcxnb.cn/cloud/2022/08/25/zbStaGNY_admin-logo.png);
+  --ck-logo-bg-fold:url(https://cdn.zcxnb.cn/cloud/2022/08/25/XGw6u63h_admin-minilogo.png);
+  --ck-logo-width-fold:50px;
+  --ck-logo-height-fold:50px;
+  --ck-logo-height:50px;
+  --ck-header-left-width:220px;
+  --ck-header-left-width-fold:70px;
+  --ck-logo-width:150px;
+  --ck-avatar-width: 35px;
+  --ck-scroll-bar-width:6px;
+  --ck-scroll-bar-color:rgb(221, 180, 148);
 }
 .dark{
-  --main-text-color:#eee;
-  --main-bg-color:#333;
-  --header-bg-color:rgb(32, 29, 44);
-  --scroll-bar-color:rgb(91, 81, 73);
-  --aside-bg-color:#222;
-  --scroll-bar-body-bg:var(--header-bg-color);
+  --ck-main-text-color:#eee;
+  --ck-main-bg-color:#333;
+  --ck-header-bg-color:rgb(32, 29, 44);
+  --ck-scroll-bar-color:rgb(91, 81, 73);
+  --ck-aside-bg-color:#222;
+  --ck-scroll-bar-body-bg:var(--ck-header-bg-color);
   // --aside-r-border-color:rgb(32, 29, 44);
 }
 @media (max-width: 500px) {
   :root {
-    --scroll-bar-width:3px;
+    --ck-scroll-bar-width:3px;
   }
 }
 *,
@@ -41,11 +41,11 @@
 .win-scrollbar{
   div,body {
     &::-webkit-scrollbar{
-      width: var(--scroll-bar-width,10px);
+      width: var(--ck-scroll-bar-width,10px);
     }
     &::-webkit-scrollbar-thumb {
       border-radius: 10px;
-      background-color: var(--scroll-bar-color,10px);
+      background-color: var(--ck-scroll-bar-color,10px);
     }
     &::-webkit-scrollbar-track{
       background-color:transparent;
@@ -54,7 +54,7 @@
   }
   body {
     &::-webkit-scrollbar-track{
-      background-color:var(--scroll-bar-body-bg,#ddd);
+      background-color:var(--ck-scroll-bar-body-bg,#ddd);
     }
   }
 }

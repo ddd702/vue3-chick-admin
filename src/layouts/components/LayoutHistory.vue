@@ -1,5 +1,5 @@
 <template>
-  <div class="app-nav-history">
+  <div class="ck-nav-history">
     <el-scrollbar view-class="t-flex">
       <!-- <div class="scrollbar-flex-content"> -->
       <el-tag
@@ -8,7 +8,7 @@
         @close="deleteTag(index)"
         :round="true"
         size="default"
-        class="app-nav-history-item"
+        class="ck-nav-history-item"
         closable
         :disable-transitions="true"
         effect="dark"
@@ -63,7 +63,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.app-nav-history {
+.ck-nav-history {
   color: #fff;
   padding-bottom: 5px;
   &-item {

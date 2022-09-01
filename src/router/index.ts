@@ -4,7 +4,7 @@ import LayoutIndex from '@/layouts/LayoutIndex.vue';
 async function setRouter() {
   const generateRoutes: any = [];
   //批量导入vue组件，懒人操作
-  const Pages = import.meta.glob(['../pages/**/*.page.vue']);
+  const Pages = import.meta.glob(['../pages/**/*-page.vue']);
   console.log('page', Pages);
   for (const path in Pages) {
     const res: any = await Pages[path]();

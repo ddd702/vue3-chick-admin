@@ -1,9 +1,9 @@
 <template>
-  <div class="app-aside" :class="{ fold: !layoutStore.leftMenuOpen }">
-    <div class="app-logo"></div>
-    <div class="app-aside-inner">
+  <div class="ck-aside" :class="{ fold: !layoutStore.leftMenuOpen }">
+    <div class="ck-logo"></div>
+    <div class="ck-aside-inner">
       <el-menu
-        class="app-aside-menu"
+        class="ck-aside-menu"
         :collapse="!layoutStore.leftMenuOpen"
         :router="true"
         :default-active="layoutStore.asideMenuActive"
@@ -85,13 +85,13 @@ export default defineComponent({
 .el-menu--collapse {
   width: 100% !important;
 }
-.app {
+.ck {
   &-logo {
-    background-image: var(--logo-bg, transparent);
+    background-image: var(--ck-logo-bg, transparent);
     background-repeat: no-repeat;
     background-position: center;
-    width: var(--logo-width);
-    height: var(--logo-height);
+    width: var(--ck-logo-width);
+    height: var(--ck-logo-height);
     background-size: contain;
     margin: 0 auto;
   }
@@ -108,29 +108,29 @@ export default defineComponent({
       rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     // border-right: 1px solid var(--aside-r-border-color,#ddd);
     z-index: 2;
-    width: var(--header-left-width);
-    background-color: var(--aside-bg-color, #fff);
+    width: var(--ck-header-left-width);
+    background-color: var(--ck-aside-bg-color, #fff);
     flex-direction: column;
     transition: width 0.5s;
     &-menu {
       width: 100%;
     }
     &.fold {
-      width: var(--header-left-width-fold);
-      .app-logo {
-        background-image: var(--logo-bg-fold, transparent);
-        width: var(--logo-width-fold);
-        height: var(--logo-height-fold);
+      width: var(--ck-header-left-width-fold);
+      .ck-logo {
+        background-image: var(--ck-logo-bg-fold, transparent);
+        width: var(--ck-logo-width-fold);
+        height: var(--ck-logo-height-fold);
       }
     }
   }
   &-aside-inner {
-    height: calc(100% - var(--logo-height));
+    height: calc(100% - var(--ck-logo-height));
     overflow-y: auto;
   }
 }
 @media (max-width: 500px) {
-  .app {
+  .ck {
     &-aside {
       &.fold {
         width: 0;
@@ -138,7 +138,7 @@ export default defineComponent({
       }
     }
     &-aside-inner {
-      height: calc(100% - var(--logo-height-fold));
+      height: calc(100% - var(--ck-logo-height-fold));
     }
   }
 }

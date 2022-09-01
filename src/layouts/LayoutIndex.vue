@@ -1,7 +1,7 @@
 <template>
-  <div class="app-wrapper t-flex">
+  <div class="ck-wrapper t-flex">
     <LayoutAside />
-    <div class="app-right" :class="{ fold: !layoutStore.leftMenuOpen }">
+    <div class="ck-right" :class="{ fold: !layoutStore.leftMenuOpen }">
       <LayoutHeader />
       <RouterView v-slot="{ Component }">
         <KeepAlive :include="routeStore.keepAlive">
@@ -47,21 +47,21 @@ export default {
 .fade-enter-to {
   opacity: 1;
 }
-.app {
+.ck {
   &-wrapper {
     min-height: 100%;
   }
   &-right {
     width: 100%;
     transition: padding 0.5s;
-    padding-left: var(--header-left-width);
+    padding-left: var(--ck-header-left-width);
     &.fold {
-      padding-left: var(--header-left-width-fold);
+      padding-left: var(--ck-header-left-width-fold);
     }
   }
 }
 @media (max-width: 500px) {
-  .app {
+  .ck {
     &-right {
       &.fold {
         padding-left: 0;

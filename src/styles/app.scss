@@ -4,8 +4,8 @@ html{
 }
 body {
   height: 100%;
-  color: var(--main-text-color,#000);
-  background: var(--main-bg-color,#fff);
+  color: var(--ck-main-text-color,#000);
+  background: var(--ck-main-bg-color,#fff);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
