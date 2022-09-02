@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import type { ThemeType } from '@/stores/layout';
 const emits = defineEmits(['select']);
 const props = defineProps<{

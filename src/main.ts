@@ -6,6 +6,7 @@ import CkPage from '@/components/CkPage.vue';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 //引入 nprogress
 import NProgress from 'nprogress'; // 进度条
+
 import 'nprogress/nprogress.css'; // 引入样式
 import App from './App.vue';
 import setRouter from './router';
@@ -24,7 +25,7 @@ import './styles/iconfont/iconfont.css';
   // 这里为啥要用async 我有必要说下：
   // 因为自动生成router的原因，是个异步操作获取相关信息
 
-  (window as any).appUtils = Utils;
+  (window as any).CkUtils = Utils;
   const app = createApp(App);
   app.use(createPinia());
 
