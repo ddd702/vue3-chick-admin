@@ -31,7 +31,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    console.warn('index mounted');
+    console.warn('index mounted', (document as any).querySelector('.ec-demo'));
     const myChart = echarts.init(
       (document as any).querySelector('.ec-demo'),
       this.layoutStore.dark ? 'dark' : 'light'
