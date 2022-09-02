@@ -8,14 +8,18 @@
       {{ footer }}
     </main>
     <footer class="ck-page-footer" v-if="$slots.footer || footer">
-      <slot name="footer">default footer</slot>
+      <slot name="footer">default footer dark:{{ layoutStore.dark }}</slot>
     </footer>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
+import { layoutStoreInject } from '@/contants';
 export default defineComponent({
+  setup() {
+    return { layoutStore: inject(layoutStoreInject) as any };
+  },
   props: {
     footer: {
       //自动填充默认底部

@@ -8,3 +8,6 @@ export const enum StorageEnum { //本地存储的变量名字
 export const enum AppEnum { //系统
   title = 'Chick Admin',
 }
+export const layoutStoreInject = Symbol();
+export const userStoreInject = Symbol();
+export const routeStoreInject = Symbol();

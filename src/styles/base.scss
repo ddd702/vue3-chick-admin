@@ -17,6 +17,7 @@ html {
   --ck-scroll-bar-width:6px;
   --ck-scroll-bar-color:#ddd;
   --ck-a-color:#777;
+  --ck-main-bg-color:#f7f7f7;
 }
 .dark{
   --ck-main-text-color:#eee;
@@ -42,7 +43,7 @@ html {
   font-weight: normal;
 }
 
-.win-scrollbar{
+.ck-scrollbar{
   div,body {
     &::-webkit-scrollbar{
       width: var(--ck-scroll-bar-width,10px);

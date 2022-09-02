@@ -9,7 +9,7 @@ import { RouterLink } from 'vue-router';
     ></el-image>
     <p style="margin: 20px 0; font-size: 20px">找不到对应的页面</p>
     <div>
-      <el-button size="large"
+      <el-button size="large" type="text"
         ><RouterLink :to="{ path: '/' }">返回首页</RouterLink></el-button
       >
     </div>

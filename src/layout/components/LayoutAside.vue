@@ -20,16 +20,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useLayoutStore } from '@/stores/layout';
+import { defineComponent, inject } from 'vue';
+import { layoutStoreInject } from '@/contants';
 import { getDataByCode } from '@/apis/sys';
 import AsideMenuItem from './AsideMenuItem.vue';
 export default defineComponent({
   components: { AsideMenuItem },
-  setup(): any {
-    const layoutStore = useLayoutStore();
+  setup() {
     return {
-      layoutStore,
+      layoutStore: inject(layoutStoreInject) as any,
     };
   },
   mounted(): void {

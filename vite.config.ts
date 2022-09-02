@@ -33,7 +33,7 @@ export default defineConfig(({ command, mode }) => {
          */
         inject: {
           data: {
-            title: `我的后台管理系统`,
+            title: `Chick Admin`,
             injectScript: `<script type="text/javascript">
               window.APP_MODE='${mode}';
               window.APP_API_HOST='${env.VITE_APP_API_HOST || ''}';

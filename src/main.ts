@@ -27,6 +27,7 @@ import './styles/iconfont/iconfont.css';
 
   (window as any).CkUtils = Utils;
   const app = createApp(App);
+  app.config.unwrapInjectedRef = true;
   app.use(createPinia());
 
   const router = await setRouter();
@@ -85,7 +86,7 @@ import './styles/iconfont/iconfont.css';
    * 设置win滚动条
    */
   if (Utils.notMac) {
-    document.querySelector('html')?.classList.add('win-scrollbar');
+    document.querySelector('html')?.classList.add('ck-scrollbar');
   }
   layoutStore.setTheme(undefined);
   layoutStore.updateDark();

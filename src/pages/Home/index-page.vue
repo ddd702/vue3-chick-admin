@@ -1,15 +1,16 @@
 <template>
   <ck-page footer header>
-    {{ msg }}
     <div class="ec-demo"></div>
-    <template #footer> footer </template>
+    <el-button @click="numAdd">++1</el-button>
+    num:{{ num }}
+    <!-- <template #footer> footer </template> -->
   </ck-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
+import { userStoreInject, layoutStoreInject } from '@/contants';
 import * as echarts from 'echarts';
-import { useLayoutStore } from '@/stores/layout';
 export default defineComponent({
   meta: {
     path: '/',
@@ -18,14 +19,21 @@ export default defineComponent({
   },
   name: 'home',
   setup() {
-    const layoutStore = useLayoutStore();
-    return { msg: 'home', layoutStore };
+    return {
+      layoutStore: inject(layoutStoreInject) as any,
+      userStore: inject(userStoreInject) as any,
+      num: ref(0),
+    };
+  },
+  methods: {
+    numAdd() {
+      this.num++;
+    },
   },
   mounted() {
-    const isDark = this.layoutStore.dark;
     const myChart = echarts.init(
       (document as any).querySelector('.ec-demo'),
-      isDark ? 'dark' : 'light'
+      this.layoutStore.dark ? 'dark' : 'light'
     );
     // 绘制图表
     myChart.setOption({

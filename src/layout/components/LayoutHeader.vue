@@ -121,23 +121,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, inject } from 'vue';
 import { RouterLink } from 'vue-router';
+import {
+  layoutStoreInject,
+  userStoreInject,
+  routeStoreInject,
+} from '@/contants';
 import LogDialog from './LogDialog.vue';
 import LayoutHistory from './LayoutHistory.vue';
 import ThemeDialog from './ThemeDialog.vue';
-import { useLayoutStore } from '@/stores/layout';
-import { useUserStore } from '@/stores/user';
 import { useLogStore } from '@/stores/log';
-import { useRouteStore } from '@/stores/route';
 import Utils from '@/utils';
 
 export default defineComponent({
   setup() {
-    const layoutStore = useLayoutStore();
-    const userStore = useUserStore();
+    const layoutStore: any = inject(layoutStoreInject);
+    const userStore: any = inject(userStoreInject);
     const logStore = useLogStore();
-    const routeStore = useRouteStore();
+    const routeStore: any = inject(routeStoreInject);
     return {
       iconSize: ref(20),
       layoutStore,

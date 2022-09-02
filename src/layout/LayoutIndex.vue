@@ -5,23 +5,28 @@
     <LayoutHeader />
     <div class="ck-container">
       <RouterView v-slot="{ Component }">
-        <KeepAlive :include="routeStore.keepAlive">
-          <Transition name="fade">
+        <Transition name="fade">
+          <KeepAlive :include="routeStore.keepAlive">
             <component :is="Component" />
-          </Transition>
-        </KeepAlive>
+          </KeepAlive>
+        </Transition>
       </RouterView>
     </div>
-    <!-- </div> -->
   </div>
 </template>
 <script lang="ts">
 import { RouterView } from 'vue-router';
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import LayoutHeader from './components/LayoutHeader.vue';
 import LayoutAside from './components/LayoutAside.vue';
+import {
+  layoutStoreInject,
+  routeStoreInject,
+  userStoreInject,
+} from '@/contants';
 import { useLayoutStore } from '@/stores/layout';
 import { useRouteStore } from '@/stores/route';
+import { useUserStore } from '@/stores/user';
 export default defineComponent({
   components: {
     RouterView,
@@ -31,9 +36,18 @@ export default defineComponent({
   setup() {
     const layoutStore = useLayoutStore();
     const routeStore = useRouteStore();
+    const userStore = useUserStore();
     return {
       layoutStore,
       routeStore,
+      userStore,
+    };
+  },
+  provide() {
+    return {
+      [layoutStoreInject]: computed(() => this.layoutStore),
+      [userStoreInject]: computed(() => this.userStore),
+      [routeStoreInject]: computed(() => this.routeStore),
     };
   },
 });

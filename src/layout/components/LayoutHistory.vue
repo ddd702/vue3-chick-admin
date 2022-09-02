@@ -45,12 +45,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { RouterLink } from 'vue-router';
-import { useRouteStore } from '@/stores/route';
+import { routeStoreInject } from '@/contants';
 export default defineComponent({
   setup() {
-    const routeStore = useRouteStore();
+    const routeStore: any = inject(routeStoreInject);
     return {
       routeStore,
     };
