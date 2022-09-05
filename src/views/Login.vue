@@ -14,17 +14,10 @@ export default defineComponent({
 </script>
 
 <template>
-  <ck-page class="about">
+  <div class="ck-login">
     <h1>{{ title }}</h1>
-    <h2>This is an about page</h2>
-  </ck-page>
+    <h2>This is an login page</h2>
+  </div>
 </template>
 
-<style lang="scss">
-@media (min-width: 1024px) {
-  .about {
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+<style lang="scss"></style>

@@ -5,10 +5,8 @@ async function setRouter() {
   const generateRoutes: any = [];
   //批量导入vue组件，懒人操作
   const Pages = import.meta.glob(['../pages/**/*-page.vue']);
-  console.log('page', Pages);
   for (const path in Pages) {
     const res: any = await Pages[path]();
-    console.log('res', res);
     const module = res.default;
     generateRoutes.push({
       path: module.meta.path,
@@ -17,7 +15,6 @@ async function setRouter() {
       component: Pages[path],
     });
   }
-  console.warn('Pages', generateRoutes);
   const router = createRouter({
     history: createWebHashHistory(import.meta.env.BASE_URL),
     routes: [
@@ -36,6 +33,18 @@ async function setRouter() {
             component: () => import('../views/AboutView.vue'),
           },
         ].concat(generateRoutes),
+      },
+      {
+        path: '/login',
+        name: 'login',
+        meta: {
+          title: '登录',
+          top: true,
+        },
+        // route level code-splitting
+        // this generates a separate chunk (About.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import('../views/Login.vue'),
       },
       {
         path: '/about',

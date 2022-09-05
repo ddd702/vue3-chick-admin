@@ -31,7 +31,6 @@ export const useRouteStore = defineStore({
   id: 'route',
   state(): StateType {
     const localCache = Utils.storage.get(StorageEnum.routeCache) || '[]';
-    console.warn('localCache', JSON.parse(localCache));
     return {
       allRoutes: [],
       currentRoute: null,
@@ -82,7 +81,7 @@ export const useRouteStore = defineStore({
         route: { fullPath, path, name, meta, params, query },
         time: dayjs().format('YYYY-M-D hh:mm:ss'),
       };
-      if (!meta.title) {
+      if (!meta.title || meta.top) {
         //注意，设置了meta.title的路由才记录
         return;
       }

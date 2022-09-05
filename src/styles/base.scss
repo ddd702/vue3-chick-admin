@@ -1,4 +1,7 @@
 
+:root{
+  --el-font-size-base:13px;
+}
 html {
   --ck-wrapper-bg-image:none;
   --ck-main-text-color:#333;
@@ -28,6 +31,9 @@ html {
   --ck-aside-bg-color:#222;
   --ck-scroll-bar-body-bg:rgb(32, 29, 44);
   // --aside-r-border-color:rgb(32, 29, 44);
+}
+.el-breadcrumb{
+  font-size:var(--el-font-size-base,14px);
 }
 @media (max-width: 500px) {
   html {

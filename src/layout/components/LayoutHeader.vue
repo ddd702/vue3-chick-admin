@@ -9,6 +9,12 @@
         />
         <ck-icon class="icon-expand" :size="iconSize" v-else />
       </span>
+      <el-breadcrumb v-if="!layoutStore.isMiniScreen" separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="item in layoutStore.pathLog" :key="item">{{
+          item
+        }}</el-breadcrumb-item>
+      </el-breadcrumb>
       <section class="ck-top-menu">
         <div class="top-icon-item">
           <el-tooltip content="清除系统缓存" placement="bottom-end">
@@ -141,7 +147,7 @@ export default defineComponent({
     const logStore = useLogStore();
     const routeStore: any = inject(routeStoreInject);
     return {
-      iconSize: ref(20),
+      iconSize: ref(18),
       layoutStore,
       userStore,
       logStore,
@@ -199,6 +205,7 @@ export default defineComponent({
     box-shadow: rgba(0, 0, 0, 0.05) 0px 3px 5px 0px;
     .menu-toggle {
       margin-left: 15px;
+      margin-right: 15px;
     }
   }
   &-header-t {

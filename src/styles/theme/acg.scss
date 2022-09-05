@@ -3,12 +3,13 @@
   --ck-wrapper-bg-image:url(https://cdn.zcxnb.cn/acg/69.jpg);
   --ck-header-bg-color: rgba(255, 255, 255, 1);
   --ck-page-bg-color: rgba(255, 255, 255, 0.8);
-  --ck-aside-bg-color:rgba(232, 233, 246, 0.5);
-  --el-menu-text-color:rgb(0, 0, 0);
-  --el-menu-active-color:rgb(113, 136, 1);
-  --el-menu-hover-bg-color:rgb(240, 203, 203);
+  --ck-aside-bg-color:rgba(48, 52, 69,0.8);
+  --el-menu-text-color:rgb(255, 239, 239);
+  --el-menu-active-color:rgb(215, 235, 116);
+  --el-menu-hover-bg-color:#333;
+  --el-menu-bg-color:rgba(48, 52, 69,0.8);
   &.dark{
-    --ck-aside-bg-color:rgba(5, 5, 5, 0.1);
+    --ck-aside-bg-color:rgba(73, 100, 208,0.2);
     --ck-page-bg-color: rgba(5, 5, 5, 0.75);
     --ck-header-bg-color: rgba(5,5,5,0.7);
     --el-menu-text-color: #fff;

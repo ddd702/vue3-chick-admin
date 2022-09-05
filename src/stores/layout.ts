@@ -26,7 +26,7 @@ type StateType = {
   dark: boolean;
   asideMenuActive: string; // 活跃的菜单index
   asideMenu: Array<MenuItem>;
-  pathLog: [];
+  pathLog: []; //路劲轨迹
   isMiniScreen: boolean;
   themeDialogShow: boolean;
   themes: Array<ThemeType>;
@@ -124,15 +124,24 @@ export const useLayoutStore = defineStore({
       // 根据路径更新active的index
       const { path } = route;
       let outIndex = '';
-      const findIndex = (item: any, index: number) => {
+      let tempArr: any = [];
+      const findIndex = (item: any) => {
+        tempArr.push(item.title);
         if (item.path === path) {
+          this.pathLog = tempArr;
           outIndex = item.hash;
           return;
         }
-        item?.children?.map(findIndex);
+        item?.children?.forEach(findIndex);
       };
-      this.asideMenu?.map(findIndex);
+      this.asideMenu?.forEach((item) => {
+        tempArr = [];
+        findIndex(item);
+      });
       this.asideMenuActive = outIndex;
+      if (!outIndex) {
+        this.pathLog = [];
+      }
     },
     setAsideMenu(val: Array<MenuItem>): void {
       function addIndex(item: MenuItem, index: number) {

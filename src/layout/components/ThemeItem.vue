@@ -57,6 +57,7 @@ const setTheme = () => {
     }
     &-inner {
       position: relative;
+      line-height: 1;
     }
   }
   &-pic {

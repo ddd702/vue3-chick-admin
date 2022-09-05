@@ -1,7 +1,7 @@
 <template>
-  <div class="posts-page">
+  <ck-page class="posts-page">
     {{ msg }}
-  </div>
+  </ck-page>
 </template>
 
 <script lang="ts">
