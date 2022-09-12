@@ -29,13 +29,13 @@
           <el-dropdown-item @click="handleMenu('home')">
             <ck-icon size="14" class="icon-home" /><span
               class="ck-nav-menu-text"
-              >跳去首页</span
+              >{{ $t('header.toHome') }}</span
             >
           </el-dropdown-item>
           <el-dropdown-item @click="handleMenu('close')">
             <ck-icon size="14" class="icon-close" /><span
               class="ck-nav-menu-text"
-              >关闭其他</span
+              >{{ $t('header.closeOther') }}</span
             >
           </el-dropdown-item>
         </template>
@@ -64,7 +64,7 @@ export default defineComponent({
   methods: {
     getTitle(tag: any) {
       if (this.layoutStore.lang === LangEnum.en) {
-        return tag.route.meta.enTitle || tag.route.meta.enTitle || 'unkown';
+        return tag.route.meta.enTitle || tag.route.meta.title || 'unkown';
       }
       return tag.route.meta.title;
     },

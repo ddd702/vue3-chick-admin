@@ -3,7 +3,7 @@
     draggable
     append-to-body
     v-model="layoutStore.themeDialogShow"
-    title="主题"
+    :title="$t('header.theme')"
     width="370px"
   >
     <div class="t-flex t-flex-wrap ck-theme-list">
@@ -17,9 +17,9 @@
     </div>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="info" @click="layoutStore.closeThemeDialog"
-          >关闭</el-button
-        >
+        <el-button type="info" @click="layoutStore.closeThemeDialog">{{
+          $t('close')
+        }}</el-button>
       </span>
     </template>
   </el-dialog>

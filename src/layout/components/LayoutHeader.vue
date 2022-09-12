@@ -32,11 +32,7 @@
             </span>
           </el-tooltip>
         </div>
-        <el-dropdown
-          :hide-on-click="false"
-          trigger="click"
-          class="top-icon-item"
-        >
+        <el-dropdown :hide-on-click="false" class="top-icon-item">
           <ck-icon class="t-pointer icon-language" :size="iconSize" />
           <template #dropdown>
             <el-dropdown-item
@@ -57,7 +53,7 @@
           </template>
         </el-dropdown>
         <div class="top-icon-item">
-          <el-tooltip content="查看调试日志" placement="bottom-end">
+          <el-tooltip :content="$t('header.checkLog')" placement="bottom-end">
             <el-badge
               :hidden="logStore.count <= 0"
               :value="logStore.count"
@@ -82,7 +78,9 @@
         </div>
         <div class="top-icon-item">
           <el-tooltip
-            :content="layoutStore.dark ? '切换到浅色模式' : '切换到暗黑模式'"
+            :content="
+              layoutStore.dark ? $t('header.toLight') : $t('header.toDark')
+            "
             placement="bottom-end"
           >
             <ck-icon
@@ -98,7 +96,11 @@
         </div>
         <div class="top-icon-item">
           <el-tooltip
-            :content="layoutStore.fullScreen ? '退出全屏' : '全屏'"
+            :content="
+              layoutStore.fullScreen
+                ? $t('header.exitFullScreen')
+                : $t('header.fullScreen')
+            "
             placement="bottom-end"
           >
             <ck-icon
@@ -122,26 +124,28 @@
               <template v-if="userStore.isLogin">
                 <el-dropdown-item>
                   <RouterLink class="t-block" :to="{ path: '/changePsw' }">
-                    修改密码
+                    {{ $t('changePsw') }}
                   </RouterLink>
                 </el-dropdown-item>
                 <el-dropdown-item @click="handleLoginOut">
-                  退出登录
+                  {{ $t('logout') }}
                 </el-dropdown-item>
               </template>
               <template v-else>
                 <el-dropdown-item>
                   <RouterLink class="t-block" :to="{ path: '/login' }">
-                    登录/注册
+                    {{ $t('login') }}
                   </RouterLink>
                 </el-dropdown-item>
               </template>
             </el-dropdown-menu>
-            <el-dropdown-item>
-              <RouterLink class="t-block" :to="{ path: '/about' }">
-                关于
-              </RouterLink>
-            </el-dropdown-item>
+            <el-dropdown-menu>
+              <el-dropdown-item>
+                <RouterLink class="t-block" :to="{ path: '/about' }">
+                  {{ $t('about') }}
+                </RouterLink>
+              </el-dropdown-item>
+            </el-dropdown-menu>
           </template>
         </el-dropdown>
       </section>
@@ -212,10 +216,8 @@ export default defineComponent({
       location.reload();
     },
     handleLoginOut() {
-      this.$confirm('确认退出登录?', '确认', {
+      this.$confirm(this.$t('confirmToLogout'), this.$t('confirm'), {
         distinguishCancelAndClose: true,
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
       }).then(() => {
         this.userStore.loginOut(() => location.reload());
       });

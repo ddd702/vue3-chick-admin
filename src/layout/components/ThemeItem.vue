@@ -10,10 +10,10 @@
         fit="cover"
         class="ck-theme-pic t-pointer"
       >
-        <template #error> 没图 </template>
+        <template #error> {{ $t('noImage') }} </template>
       </el-image>
     </div>
-    <h4>{{ item.title || item.name || '默认' }}</h4>
+    <h4>{{ item.title || item.name || $t('default') }}</h4>
   </div>
 </template>
 

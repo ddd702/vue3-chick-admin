@@ -3,13 +3,13 @@
     draggable
     append-to-body
     v-model="logStore.visible"
-    title="日志"
+    :title="$t('header.checkLog')"
     width="85%"
   >
     <div class="dialog-header">
       <el-button type="danger" round @click="handleClear">
         <ck-icon class="icon-delete" />
-        清空
+        {{ $t('clear') }}
       </el-button>
     </div>
     <el-table :data="logStore.list" stripe style="width: 100%">
@@ -48,9 +48,9 @@
     </el-table>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="info" @click="logStore.visible = false"
-          >关闭</el-button
-        >
+        <el-button type="info" @click="logStore.visible = false">{{
+          $t('close')
+        }}</el-button>
       </span>
     </template>
   </el-dialog>
