@@ -4,8 +4,9 @@
 import { defineStore } from 'pinia';
 import zhCn from 'element-plus/es/locale/lang/zh-cn';
 import en from 'element-plus/es/locale/lang/en';
-import { StorageEnum } from '@/contants';
+import { StorageEnum, LangEnum } from '@/contants';
 import { useRouteStore } from './route';
+import i18n from '@/locale';
 import Utils from '@/utils';
 export type MenuItem = {
   hash?: string;
@@ -72,18 +73,20 @@ export const useLayoutStore = defineStore({
       // 如果有数值
       leftMenuOpen = Utils.storage.get(StorageEnum.leftMenuOpen) === '1';
     }
+    const defaultLang = Utils.storage.get(StorageEnum.lang) || 'zh-cn';
+    i18n.global.locale = defaultLang;
     return {
       langList: [
         {
           name: '中文',
-          value: 'zh-cn',
+          value: LangEnum.zhCn,
         },
         {
           name: 'English',
-          value: 'en',
+          value: LangEnum.en,
         },
       ],
-      lang: Utils.storage.get(StorageEnum.lang) || 'zh-cn',
+      lang: defaultLang,
       fullScreen: false,
       leftMenuOpen,
       asideMenuActive: '0',
@@ -117,9 +120,10 @@ export const useLayoutStore = defineStore({
     },
   },
   actions: {
-    setLang(value: string) {
+    setLang(value: LangEnum) {
       this.lang = value;
       Utils.storage.set(StorageEnum.lang, value);
+      i18n.global.locale = value;
     },
     setTheme(name: string | undefined): void {
       if (name === undefined) {
@@ -155,7 +159,7 @@ export const useLayoutStore = defineStore({
       let outIndex = '';
       let tempArr: any = [];
       const findIndex = (item: any) => {
-        tempArr.push(item.title);
+        tempArr.push(item);
         if (item.path === path) {
           this.pathLog = tempArr;
           outIndex = item.hash;

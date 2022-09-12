@@ -5,7 +5,7 @@
         <el-icon v-if="!subMenu || item.icon">
           <ck-icon :class="setIcon(item)" />
         </el-icon>
-        <span>{{ item.title }}</span>
+        <span>{{ getTitle(item) }}</span>
       </template>
       <AsideMenuItem sub-menu :menus="item.children" />
     </el-sub-menu>
@@ -13,13 +13,14 @@
       <el-icon v-if="!subMenu || item.icon">
         <ck-icon :class="setIcon(item)" />
       </el-icon>
-      <template #title>{{ item.title }}</template>
+      <template #title>{{ getTitle(item) }}</template>
     </el-menu-item>
   </template>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
+import { layoutStoreInject, LangEnum } from '@/contants';
 import type { MenuItem } from '@/stores/layout';
 export default defineComponent({
   name: 'AsideMenuItem',
@@ -31,7 +32,19 @@ export default defineComponent({
       type: Array<MenuItem>,
     },
   },
+  setup() {
+    return {
+      layoutStore: inject(layoutStoreInject) as any,
+    };
+  },
   methods: {
+    getTitle(item: MenuItem) {
+      //国际化
+      if (this.layoutStore.lang === LangEnum.en) {
+        return item.enTitle || item.title;
+      }
+      return item.title;
+    },
     setIcon(item: MenuItem): object {
       const outClass: any = {};
       if (!item.icon) {

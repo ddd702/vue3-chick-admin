@@ -1,27 +1,13 @@
 import { createI18n } from 'vue-i18n';
-
+import zhCn from './lang/zh-cn';
+import en from './lang/en';
 const messages = {
-  zhCn: {
-    message: {
-      hello: '你好, 世界',
-    },
-  },
-  en: {
-    message: {
-      hello: 'hello world',
-    },
-  },
-  ja: {
-    message: {
-      hello: 'こんにちは、世界',
-    },
-  },
+  'zh-cn': zhCn,
+  en,
 };
 const i18n = createI18n({
-  // legacy: false,
-  // globalInjection: true,
-  locale: 'en',
-  fallbackLocale: 'zhCn', // set fallback locale
+  locale: 'zh-cn',
+  fallbackLocale: 'en', // set fallback locale
   messages,
 });
 

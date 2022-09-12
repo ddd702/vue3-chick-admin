@@ -17,7 +17,7 @@
         "
       >
         <RouterLink :to="{ path: tag.route.fullPath }">{{
-          tag.route.meta.title || '未知页面'
+          getTitle(tag)
         }}</RouterLink>
       </el-tag>
       <!-- </div> -->
@@ -47,18 +47,27 @@
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
 import { RouterLink } from 'vue-router';
-import { routeStoreInject } from '@/contants';
+import { routeStoreInject, layoutStoreInject, LangEnum } from '@/contants';
+import { storeToRefs } from 'pinia';
 export default defineComponent({
   setup() {
     const routeStore: any = inject(routeStoreInject);
+    const layoutStore: any = inject(layoutStoreInject);
     return {
       routeStore,
+      layoutStore,
     };
   },
   components: {
     RouterLink,
   },
   methods: {
+    getTitle(tag: any) {
+      if (this.layoutStore.lang === LangEnum.en) {
+        return tag.route.meta.enTitle || tag.route.meta.enTitle || 'unkown';
+      }
+      return tag.route.meta.title;
+    },
     deleteTag(index: number) {
       if (this.routeStore.cache[index].route.path === '/') {
         //首页不能删除

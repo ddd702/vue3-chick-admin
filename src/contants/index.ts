@@ -6,6 +6,10 @@ export const enum StorageEnum { //本地存储的变量名字
   leftMenuOpen = 'ck-left-menu-open',
   theme = 'ck-theme',
 }
+export const enum LangEnum { //国际化
+  zhCn = 'zh-cn',
+  en = 'en',
+}
 export const enum CookieEnum {
   userInfo = 'ck-user',
   token = 'ck-token',

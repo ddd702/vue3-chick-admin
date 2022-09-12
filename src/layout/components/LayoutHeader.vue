@@ -10,17 +10,19 @@
         <ck-icon class="icon-expand" :size="iconSize" v-else />
       </span>
       <el-breadcrumb v-if="!layoutStore.isMiniScreen" separator="/">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/' }">{{
+          $t('header.home')
+        }}</el-breadcrumb-item>
         <el-breadcrumb-item v-for="item in layoutStore.pathLog" :key="item">{{
-          item
+          getPathTitle(item)
         }}</el-breadcrumb-item>
       </el-breadcrumb>
       <section class="ck-top-menu">
         <div class="top-icon-item">
-          <el-tooltip content="清除系统缓存" placement="bottom-end">
+          <el-tooltip :content="$t('header.delCache')" placement="bottom-end">
             <span>
               <el-popconfirm
-                title="删除本地存储并重载当前页面?"
+                :title="$t('header.delCacheConfirm')"
                 @confirm="clearStorage"
               >
                 <template #reference>
@@ -70,7 +72,7 @@
           </el-tooltip>
         </div>
         <div class="top-icon-item">
-          <el-tooltip content="主题" placement="bottom-end">
+          <el-tooltip :content="$t('header.theme')" placement="bottom-end">
             <ck-icon
               class="t-pointer icon-skin"
               :size="iconSize"
@@ -157,6 +159,7 @@ import {
   layoutStoreInject,
   userStoreInject,
   routeStoreInject,
+  LangEnum,
 } from '@/contants';
 import LogDialog from './LogDialog.vue';
 import LayoutHistory from './LayoutHistory.vue';
@@ -191,7 +194,13 @@ export default defineComponent({
     });
   },
   methods: {
-    setLang(value) {
+    getPathTitle(item: any) {
+      if (this.layoutStore.lang === LangEnum.en) {
+        return item.enTitle || item.title;
+      }
+      return item.title;
+    },
+    setLang(value: LangEnum) {
       this.layoutStore.setLang(value);
     },
     openTheme() {

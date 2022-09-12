@@ -18,6 +18,7 @@ export default defineComponent({
   meta: {
     path: '/',
     title: '首页',
+    enTitle: 'Home',
     auth: true,
     cache: true,
   },
