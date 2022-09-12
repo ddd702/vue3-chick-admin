@@ -2,6 +2,8 @@
 import { ref, reactive, defineComponent } from 'vue';
 import type { FormRules } from 'element-plus';
 import { useUserStore } from '@/stores/user';
+import { useRouteStore } from '@/stores/route';
+import { useLayoutStore } from '@/stores/layout';
 import MD5 from 'md5';
 import { login } from '@/apis/sys';
 import Utils from '@/utils';
@@ -26,6 +28,8 @@ export default defineComponent({
       ],
     });
     return {
+      routeStore: useRouteStore(),
+      layoutStore: useLayoutStore(),
       userStore: useUserStore(),
       loading: ref(false),
       pswView: ref(false),
@@ -47,15 +51,14 @@ export default defineComponent({
           name: account,
           psw: MD5(password),
         }).finally(() => (this.loading = false));
-        console.warn('ddd', res);
         this.userStore.setUser({
           id: res.id,
           userName: res.name,
           avatar: res.avatar,
           token: res.token,
         });
-        // this.userStore.setToken(res.token);
-        Utils.goHome();
+
+        Utils.goPage(this.routeStore.lastCacheRoute.path);
       }
     },
   },
@@ -65,6 +68,7 @@ export default defineComponent({
 <template>
   <div class="ck-login">
     <el-image
+      v-if="!layoutStore.isMiniScreen"
       class="ck-login-pic"
       src="https://cdn.zcxnb.cn/cloud/2022/09/05/pbbA7hGx_Authentication_Flatline.svg"
     ></el-image>
@@ -100,7 +104,7 @@ export default defineComponent({
                 <ck-icon
                   @click="pswView = !pswView"
                   class="t-pointer"
-                  :class="{ 'icon-unview': !pswView, 'icon-view': pswView }"
+                  :class="{ 'icon-view': !pswView, 'icon-unview': pswView }"
                 ></ck-icon>
               </template>
             </el-input>

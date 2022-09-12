@@ -50,10 +50,14 @@ export default {
   notMac:
     navigator.userAgent.indexOf('Windows') > -1 ||
     navigator.userAgent.indexOf('Linux') > -1, // s是否是win系统
-  goPage(val: string): void {
-    console.warn('goPage');
+  goPage(path: string): void {
+    // console.warn('goPage');
+    (window as any).CkRouter.push({ path });
   },
   goHome() {
     (window as any).CkRouter.push({ path: '/' });
+  },
+  goLogin() {
+    (window as any).CkRouter.push({ path: '/login' });
   },
 };

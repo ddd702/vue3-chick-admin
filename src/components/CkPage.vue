@@ -15,10 +15,14 @@
 
 <script lang="ts">
 import { defineComponent, inject } from 'vue';
-import { layoutStoreInject } from '@/contants';
+import { layoutStoreInject, userStoreInject } from '@/contants';
+import Utils from '@/utils';
 export default defineComponent({
   setup() {
-    return { layoutStore: inject(layoutStoreInject) as any };
+    return {
+      layoutStore: inject(layoutStoreInject) as any,
+      userStore: inject(userStoreInject) as any,
+    };
   },
   props: {
     footer: {
@@ -33,6 +37,19 @@ export default defineComponent({
     },
   },
   name: 'ck-page',
+  mounted() {
+    console.warn('ck-page mounted', this.$route);
+    if (this.$route?.meta?.auth) {
+      if (!this.userStore.isLogin) {
+        this.$notify({
+          showClose: true,
+          type: 'warning',
+          message: '请先登录',
+        });
+        return Utils.goLogin();
+      }
+    }
+  },
 });
 </script>
 

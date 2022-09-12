@@ -3,7 +3,7 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import CkIcon from '@/components/CkIcon.vue';
 import CkPage from '@/components/CkPage.vue';
-import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import i18n from '@/locale';
 //引入 nprogress
 import NProgress from 'nprogress'; // 进度条
 
@@ -33,11 +33,8 @@ import './styles/iconfont/iconfont.css';
   const router = await setRouter();
   (window as any).CkRouter = router;
   app.use(router);
-
-  app.use(ElementPlus, {
-    locale: zhCn,
-  });
-
+  app.use(i18n);
+  app.use(ElementPlus);
   //注册全局组件
   app.component('CkIcon', CkIcon);
   app.component('CkPage', CkPage);
@@ -91,3 +88,11 @@ import './styles/iconfont/iconfont.css';
   layoutStore.setTheme(undefined);
   layoutStore.updateDark();
 })();
+declare module '@vue/runtime-core' {
+  //去除ts的报错
+  interface ComponentCustomProperties {
+    $message: any;
+    $notify: any;
+    $confirm: any;
+  }
+}

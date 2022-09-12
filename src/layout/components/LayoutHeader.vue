@@ -30,6 +30,30 @@
             </span>
           </el-tooltip>
         </div>
+        <el-dropdown
+          :hide-on-click="false"
+          trigger="click"
+          class="top-icon-item"
+        >
+          <ck-icon class="t-pointer icon-language" :size="iconSize" />
+          <template #dropdown>
+            <el-dropdown-item
+              v-for="lang in layoutStore.langList"
+              :key="lang.value"
+              @click="setLang(lang.value)"
+            >
+              <el-button link>
+                <ck-icon
+                  style="margin-right: 5px"
+                  class="icon-correct"
+                  :class="{ 't-transparent': lang.value !== layoutStore.lang }"
+                  :size="iconSize / 2"
+                />
+                {{ lang.name }}</el-button
+              >
+            </el-dropdown-item>
+          </template>
+        </el-dropdown>
         <div class="top-icon-item">
           <el-tooltip content="查看调试日志" placement="bottom-end">
             <el-badge
@@ -167,6 +191,9 @@ export default defineComponent({
     });
   },
   methods: {
+    setLang(value) {
+      this.layoutStore.setLang(value);
+    },
     openTheme() {
       //打开主题弹框
       this.layoutStore.openThemeDialog();
@@ -176,7 +203,13 @@ export default defineComponent({
       location.reload();
     },
     handleLoginOut() {
-      console.warn('handleLoginOut');
+      this.$confirm('确认退出登录?', '确认', {
+        distinguishCancelAndClose: true,
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(() => {
+        this.userStore.loginOut(() => location.reload());
+      });
     },
     toggleMenu() {
       this.layoutStore.switchLeftMenu();

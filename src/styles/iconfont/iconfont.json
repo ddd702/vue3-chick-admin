@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "22095753",
+      "name": "language",
+      "font_class": "language",
+      "unicode": "e9cf",
+      "unicode_decimal": 59855
+    },
+    {
       "icon_id": "17280272",
       "name": "icon_theme-114",
       "font_class": "skin",
@@ -490,14 +497,14 @@
     },
     {
       "icon_id": "31425988",
-      "name": "应用管理",
+      "name": "菜单管理",
       "font_class": "app-setting",
       "unicode": "e644",
       "unicode_decimal": 58948
     },
     {
       "icon_id": "31425989",
-      "name": "模块分类",
+      "name": "模块管理",
       "font_class": "mode",
       "unicode": "e645",
       "unicode_decimal": 58949

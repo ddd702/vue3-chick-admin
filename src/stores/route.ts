@@ -41,6 +41,14 @@ export const useRouteStore = defineStore({
     cacheCount(state): number {
       return state.cache.length || 0;
     },
+    lastCacheRoute(state): RouteMiniType {
+      return (
+        state.cache.slice(-1)[0]?.route || {
+          fullPath: '/',
+          path: '/',
+        }
+      );
+    },
     keepAlive(state): string[] {
       const out: any = [];
       state.allRoutes.map((item) => {

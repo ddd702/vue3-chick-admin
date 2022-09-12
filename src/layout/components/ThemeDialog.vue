@@ -4,7 +4,7 @@
     append-to-body
     v-model="layoutStore.themeDialogShow"
     title="主题"
-    :width="layoutStore.isMiniScreen ? '95%' : '400px'"
+    width="370px"
   >
     <div class="t-flex t-flex-wrap ck-theme-list">
       <ThemeItem

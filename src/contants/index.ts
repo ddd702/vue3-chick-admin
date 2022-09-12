@@ -1,4 +1,5 @@
 export const enum StorageEnum { //本地存储的变量名字
+  lang = 'ck-lang',
   global = 'ck-sys',
   dark = 'ck-dark',
   routeCache = 'ck-route-cache',

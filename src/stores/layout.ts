@@ -2,6 +2,8 @@
  * 页面交互
  * */
 import { defineStore } from 'pinia';
+import zhCn from 'element-plus/es/locale/lang/zh-cn';
+import en from 'element-plus/es/locale/lang/en';
 import { StorageEnum } from '@/contants';
 import { useRouteStore } from './route';
 import Utils from '@/utils';
@@ -20,10 +22,16 @@ export type ThemeType = {
   preview: string;
   darkPreview?: string;
 };
+export type LangType = {
+  name: string;
+  value: string;
+};
 type StateType = {
+  langList: Array<LangType>;
   leftMenuOpen: boolean;
   fullScreen: boolean;
   dark: boolean;
+  lang: string;
   asideMenuActive: string; // 活跃的菜单index
   asideMenu: Array<MenuItem>;
   pathLog: []; //路劲轨迹
@@ -65,6 +73,17 @@ export const useLayoutStore = defineStore({
       leftMenuOpen = Utils.storage.get(StorageEnum.leftMenuOpen) === '1';
     }
     return {
+      langList: [
+        {
+          name: '中文',
+          value: 'zh-cn',
+        },
+        {
+          name: 'English',
+          value: 'en',
+        },
+      ],
+      lang: Utils.storage.get(StorageEnum.lang) || 'zh-cn',
       fullScreen: false,
       leftMenuOpen,
       asideMenuActive: '0',
@@ -90,8 +109,18 @@ export const useLayoutStore = defineStore({
       });
       return tempArr;
     },
+    eleLang(state: StateType): any {
+      if (state.lang === 'en') {
+        return en;
+      }
+      return zhCn;
+    },
   },
   actions: {
+    setLang(value: string) {
+      this.lang = value;
+      Utils.storage.set(StorageEnum.lang, value);
+    },
     setTheme(name: string | undefined): void {
       if (name === undefined) {
         name = this.themeActiveName;

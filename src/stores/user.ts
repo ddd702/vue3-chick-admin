@@ -4,6 +4,12 @@
 import { defineStore } from 'pinia';
 import Utils from '@/utils';
 import { CookieEnum } from '@/contants';
+const defaultState = {
+  id: '-1',
+  token: '',
+  userName: 'ghost',
+  avatar: 'https://cravatar.cn/avatar/',
+};
 type StateType = {
   id?: string | number;
   token: string;
@@ -13,12 +19,7 @@ type StateType = {
 export const useUserStore = defineStore({
   id: 'user',
   state(): StateType {
-    let initialState = {
-      id: '-1',
-      token: '',
-      userName: 'ghost',
-      avatar: 'https://cravatar.cn/avatar/',
-    };
+    let initialState = JSON.parse(JSON.stringify(defaultState));
     try {
       if (Utils.cookies.get(CookieEnum.userInfo)) {
         initialState = JSON.parse(
@@ -26,7 +27,7 @@ export const useUserStore = defineStore({
         );
       }
     } catch (error) {}
-    return Object.assign(initialState, {
+    return Object.assign({}, initialState, {
       token: Utils.cookies.get(CookieEnum.token) || '',
     });
   },
@@ -34,16 +35,20 @@ export const useUserStore = defineStore({
     isLogin: (state) => !!state.token,
   },
   actions: {
-    setUser(val: {
-      id?: '' | undefined;
-      userName?: '' | undefined;
-      avatar?: '' | undefined;
-      token?: '' | undefined;
-    }): void {
+    loginOut(
+      cb = () => {
+        return false;
+      } //退出后的回调
+    ) {
+      this.setUser(defaultState);
+      cb && cb();
+    },
+    setUser(val: StateType): void {
       const { userName = '', avatar = '', id = '-1', token = '' } = val;
       this.userName = userName;
       this.avatar = avatar;
       this.id = id;
+      this.token = token;
       Utils.cookies.set(
         CookieEnum.userInfo,
         JSON.stringify({ userName, avatar, id })

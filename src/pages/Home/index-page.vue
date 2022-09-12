@@ -3,7 +3,9 @@
     <div class="ec-demo"></div>
     <el-button @click="numAdd">++1</el-button>
     num:{{ num }}
-    <!-- <template #footer> footer </template> -->
+    <template #footer>
+      <p>{{ $t('message.hello') }}</p>
+    </template>
   </ck-page>
 </template>
 
@@ -16,6 +18,7 @@ export default defineComponent({
   meta: {
     path: '/',
     title: '首页',
+    auth: true,
     cache: true,
   },
   name: 'home',

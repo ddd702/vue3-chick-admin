@@ -9,6 +9,7 @@ export default {
   meta: {
     path: '/posts',
     title: '文章列表',
+    auth: true,
     cache: true,
   },
   name: 'posts',
