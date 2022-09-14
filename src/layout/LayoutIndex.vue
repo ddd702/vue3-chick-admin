@@ -79,7 +79,7 @@ export default defineComponent({
       padding-left: var(--ck-header-left-width-fold);
     }
     &::after {
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;

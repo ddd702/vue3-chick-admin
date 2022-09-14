@@ -39,7 +39,6 @@ export default defineComponent({
   },
   name: 'ck-page',
   mounted() {
-    console.warn('ck-page mounted', this.$route);
     if (this.$route?.meta?.auth) {
       if (!this.userStore.isLogin) {
         this.$notify({
