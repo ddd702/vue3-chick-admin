@@ -5,9 +5,8 @@ import { defineStore } from 'pinia';
 import Utils from '@/utils';
 import { CookieEnum } from '@/contants';
 import { getUserConf } from '@/apis/sys';
-const defaultState = {
+const defaultUser = {
   id: '-1',
-  token: '',
   userName: 'ghost',
   avatar: 'https://cravatar.cn/avatar/',
 };
@@ -20,7 +19,7 @@ type StateType = {
 export const useUserStore = defineStore({
   id: 'user',
   state(): StateType {
-    let initialState = JSON.parse(JSON.stringify(defaultState));
+    let initialState = JSON.parse(JSON.stringify(defaultUser));
     try {
       if (Utils.cookies.get(CookieEnum.userInfo)) {
         initialState = JSON.parse(
@@ -41,7 +40,8 @@ export const useUserStore = defineStore({
         return false;
       } //退出后的回调
     ) {
-      this.setUser(defaultState);
+      Utils.cookies.remove(CookieEnum.token);
+      this.setUser(defaultUser);
       cb && cb();
     },
     async fetchUser(): Promise<any> {
