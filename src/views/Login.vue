@@ -7,10 +7,10 @@ import { useLayoutStore } from '@/stores/layout';
 import MD5 from 'md5';
 import { login } from '@/apis/sys';
 import Utils from '@/utils';
+
 export default defineComponent({
   setup() {
     const title = ref(import.meta.env.VITE_APP_TITLE);
-    const description = ref('说明');
     const rules = reactive<FormRules>({
       account: [
         {
@@ -34,7 +34,6 @@ export default defineComponent({
       loading: ref(false),
       pswView: ref(false),
       title,
-      description,
       rules,
       form: reactive({
         password: '123456',
@@ -55,8 +54,8 @@ export default defineComponent({
           id: res.id,
           userName: res.name,
           avatar: res.avatar,
-          token: res.token,
         });
+        this.userStore.setToken(res.token);
 
         Utils.goPage(this.routeStore.lastCacheRoute.path);
       }

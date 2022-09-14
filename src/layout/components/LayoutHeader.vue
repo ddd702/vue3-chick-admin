@@ -279,6 +279,7 @@ export default defineComponent({
   }
   &-avatar {
     width: var(--ck-avatar-width, 40px);
+    height: var(--ck-avatar-width, 40px);
     border-radius: 50%;
   }
 }

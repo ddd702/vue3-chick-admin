@@ -4,6 +4,7 @@
 import { defineStore } from 'pinia';
 import Utils from '@/utils';
 import { CookieEnum } from '@/contants';
+import { getUserConf } from '@/apis/sys';
 const defaultState = {
   id: '-1',
   token: '',
@@ -12,7 +13,7 @@ const defaultState = {
 };
 type StateType = {
   id?: string | number;
-  token: string;
+  token?: string;
   userName: string;
   avatar: string;
 };
@@ -43,17 +44,28 @@ export const useUserStore = defineStore({
       this.setUser(defaultState);
       cb && cb();
     },
+    async fetchUser(): Promise<any> {
+      if (this.isLogin) {
+        const res = await getUserConf();
+        console.warn('fetchUser', res);
+        this.setUser({
+          id: res.id,
+          userName: res.name,
+          avatar: res.avatar,
+        });
+        return res;
+      }
+      return null;
+    },
     setUser(val: StateType): void {
-      const { userName = '', avatar = '', id = '-1', token = '' } = val;
+      const { userName = '', avatar = '', id = '-1' } = val;
       this.userName = userName;
       this.avatar = avatar;
       this.id = id;
-      this.token = token;
       Utils.cookies.set(
         CookieEnum.userInfo,
         JSON.stringify({ userName, avatar, id })
       );
-      Utils.cookies.set(CookieEnum.token, token);
     },
     setToken(val: string | undefined): void {
       this.token = val || '';

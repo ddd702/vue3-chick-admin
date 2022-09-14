@@ -39,13 +39,14 @@ export const opts = {
 export const promisefy = (
   data: object,
   url: string,
-  type = 'post'
+  type = 'post',
+  otherOpts: any = {}
 ): Promise<void> =>
   new Promise(async (resolve, reject) => {
     requestFun(resolve, reject, {
       type,
       data,
-      opts,
+      opts: Object.assign({}, opts, otherOpts),
       url,
     });
   });

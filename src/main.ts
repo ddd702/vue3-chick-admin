@@ -12,6 +12,7 @@ import App from './App.vue';
 import setRouter from './router';
 import Utils from './utils';
 import { useLayoutStore } from '@/stores/layout';
+import { useUserStore } from '@/stores/user';
 import { useRouteStore } from '@/stores/route';
 import { useLogStore, LogEnum } from '@/stores/log';
 import 'element-plus/dist/index.css';
@@ -42,8 +43,11 @@ import './styles/iconfont/iconfont.css';
   //app.use(createPinia()) 后才能初始化store
   const layoutStore = useLayoutStore();
   const logStore = useLogStore();
+  const userStore = useUserStore();
   const routeStore = useRouteStore();
   routeStore.setAllRoutes(router.getRoutes());
+  userStore.fetchUser(); //获取用户信息
+  // layoutStore.setAsideMenu(JSON.parse(res.menus));
   /**收集错误
    */
   app.config.errorHandler = (err: any, _instance, info) => {

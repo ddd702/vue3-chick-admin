@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
+import { CookieEnum } from '@/contants';
 import { useLogStore, LogEnum } from '@/stores/log';
 import Utils from '@/utils';
 
@@ -40,8 +41,8 @@ const service = axios.create({
 service.interceptors.request.use(
   (config: any) => {
     // 在请求发送之前做一些处理
-    if (!/^https:\/\/|http:\/\//.test(config.url)) {
-      const token = Utils.cookies.get('token');
+    if (!/^https:\/\/|http:\/\//.test(config.url) && !!!config.noToken) {
+      const token = Utils.cookies.get(CookieEnum.token);
       if (token && token !== 'undefined') {
         // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
         config.headers['token'] = token;
