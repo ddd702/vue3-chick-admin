@@ -8,7 +8,6 @@ import Utils from '@/utils';
 function errorCreat({ msg, otherinfo }: { msg: string; otherinfo: any }): void {
   const err = new Error(msg);
   errorLog(err, otherinfo);
-  throw err;
 }
 
 // 记录和显示错误
@@ -79,9 +78,12 @@ service.interceptors.response.use(
       return dataAxios;
     } else {
       // 有 code 代表这是一个后端接口 可以进行进一步的判断
+
       if (rcode === 702) {
+        //token失败
         errorCreat({ msg: `${errMsg}`, otherinfo });
-        return;
+        Utils.cookies.remove(CookieEnum.token);
+        return Utils.goLogin();
       }
       switch (rcode) {
         case 200:
