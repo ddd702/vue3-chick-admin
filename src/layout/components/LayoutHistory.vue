@@ -7,7 +7,7 @@
         :key="tag.time"
         @close="deleteTag(index)"
         size="large"
-        :round="false"
+        :round="true"
         class="ck-nav-history-item"
         :closable="tag.route.path !== '/'"
         :disable-transitions="true"
