@@ -89,8 +89,7 @@ import './styles/iconfont/iconfont.css';
   if (Utils.notMac) {
     document.querySelector('html')?.classList.add('ck-scrollbar');
   }
-  layoutStore.setTheme(undefined);
-  layoutStore.updateDark();
+  layoutStore.initUi();
 })();
 declare module '@vue/runtime-core' {
   //去除ts的报错

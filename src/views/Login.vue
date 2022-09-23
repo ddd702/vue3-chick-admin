@@ -56,7 +56,9 @@ export default defineComponent({
           avatar: res.avatar,
         });
         this.userStore.setToken(res.token);
-
+        // this.layoutStore.setTheme(undefined);
+        this.layoutStore.$reset();
+        this.layoutStore.initUi();
         Utils.goPage(this.routeStore.lastCacheRoute.path);
       }
     },

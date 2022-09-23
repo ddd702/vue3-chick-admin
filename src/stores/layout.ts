@@ -207,5 +207,10 @@ export const useLayoutStore = defineStore({
         document.querySelector('html')?.classList.remove('dark');
       }
     },
+    initUi(): void {
+      //更新ui显示
+      this.updateDark();
+      this.setTheme(undefined);
+    },
   },
 });
