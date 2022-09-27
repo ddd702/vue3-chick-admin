@@ -2,6 +2,7 @@ export default {
   message: {
     hello: '你好, 世界',
   },
+  copySuccess: '复制成功',
   default: '默认',
   noImage: '无图',
   close: '关闭',

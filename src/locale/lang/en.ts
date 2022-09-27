@@ -7,6 +7,7 @@ export default {
   close: 'Close',
   clear: 'Clear',
   confirm: 'Confirm',
+  copySuccess: 'Copy Success',
   changePsw: 'Change password',
   login: 'Login',
   logout: 'Login out',

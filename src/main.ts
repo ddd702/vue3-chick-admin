@@ -6,8 +6,9 @@ import CkPage from '@/components/CkPage.vue';
 import i18n from '@/locale';
 //引入 nprogress
 import NProgress from 'nprogress'; // 进度条
-
 import 'nprogress/nprogress.css'; // 引入样式
+//引入自定义指令
+import MyDirectives from '@/plugins/directives';
 import App from './App.vue';
 import setRouter from './router';
 import Utils from './utils';
@@ -22,6 +23,7 @@ import './styles/iconfont/iconfont.css';
 (async () => {
   // 这里为啥要用async 我有必要说下：
   // 因为自动生成router的原因，是个异步操作获取相关信息
+
   window.CkUtils = Utils;
   const app = createApp(App);
   app.config.unwrapInjectedRef = true;
@@ -32,6 +34,7 @@ import './styles/iconfont/iconfont.css';
   app.use(router);
   app.use(i18n);
   app.use(ElementPlus);
+  MyDirectives(app); //注入自定义指令
   //注册全局组件
   app.component('CkIcon', CkIcon);
   app.component('CkPage', CkPage);
