@@ -40,6 +40,7 @@
     "@types/jsdom": "^20.0.0",
     "@types/md5": "^2.3.2",
     "@types/node": "^16.11.47",
+    "@types/nprogress": "^0.2.0",
     "@types/rollup-plugin-visualizer": "^4.2.1",
     "@vitejs/plugin-vue": "^3.0.1",
     "@vitejs/plugin-vue-jsx": "^2.0.0",

@@ -19,20 +19,16 @@ import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import './styles/app.scss';
 import './styles/iconfont/iconfont.css';
-// if(true){
-//   document.querySelector('html')?.classList.add('ck-theme-acg');
-// }
 (async () => {
   // 这里为啥要用async 我有必要说下：
   // 因为自动生成router的原因，是个异步操作获取相关信息
-
-  (window as any).CkUtils = Utils;
+  window.CkUtils = Utils;
   const app = createApp(App);
   app.config.unwrapInjectedRef = true;
   app.use(createPinia());
 
   const router = await setRouter();
-  (window as any).CkRouter = router;
+  window.CkRouter = router;
   app.use(router);
   app.use(i18n);
   app.use(ElementPlus);
@@ -40,7 +36,6 @@ import './styles/iconfont/iconfont.css';
   app.component('CkIcon', CkIcon);
   app.component('CkPage', CkPage);
   app.mount('#app');
-  //app.use(createPinia()) 后才能初始化store
   const layoutStore = useLayoutStore();
   const logStore = useLogStore();
   const userStore = useUserStore();
@@ -91,11 +86,3 @@ import './styles/iconfont/iconfont.css';
   }
   layoutStore.initUi();
 })();
-declare module '@vue/runtime-core' {
-  //去除ts的报错
-  interface ComponentCustomProperties {
-    $message: any;
-    $notify: any;
-    $confirm: any;
-  }
-}
