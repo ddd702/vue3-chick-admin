@@ -1,12 +1,5 @@
 <template>
   <ck-page footer header>
-    <el-button
-      type="primary"
-      :copy-success-tip="$t('copySuccess')"
-      v-copy="copyText"
-    >
-      v-copy指令
-    </el-button>
     <div class="ec-wrapper">
       <div id="ec-2" class="ec-demo"></div>
       <div id="ec-1" class="ec-demo"></div>
@@ -31,7 +24,6 @@ export default defineComponent({
   name: 'home',
   setup() {
     return {
-      copyText: 'ddd:这是要复制的内容' + Date.now(),
       layoutStore: inject(layoutStoreInject) as any,
       userStore: inject(userStoreInject) as any,
       num: ref(0),

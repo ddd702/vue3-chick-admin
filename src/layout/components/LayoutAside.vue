@@ -1,7 +1,7 @@
 <template>
   <div class="ck-aside" :class="{ fold: !layoutStore.leftMenuOpen }">
     <div class="ck-logo"></div>
-    <div class="ck-aside-inner">
+    <div class="ck-aside-inner" v-loading="loading">
       <el-menu
         class="ck-aside-menu"
         :collapse="!layoutStore.leftMenuOpen"
@@ -20,7 +20,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 import { layoutStoreInject } from '@/contants';
 import { getDataByCode } from '@/apis/sys';
 import AsideMenuItem from './AsideMenuItem.vue';
@@ -28,6 +28,7 @@ export default defineComponent({
   components: { AsideMenuItem },
   setup() {
     return {
+      loading: ref(false),
       layoutStore: inject(layoutStoreInject) as any,
     };
   },
@@ -36,7 +37,10 @@ export default defineComponent({
   },
   methods: {
     async fetchData() {
-      const res = await getDataByCode({ code: 'clay-menu' });
+      this.loading = true;
+      const res = await getDataByCode({ code: 'clay-menu' }).finally(() => {
+        this.loading = false;
+      });
       this.layoutStore.setAsideMenu(JSON.parse(res.data));
     },
   },

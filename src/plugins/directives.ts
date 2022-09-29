@@ -1,10 +1,13 @@
 //该文件保存diy的vue指令
 import Clipboard from 'clipboard';
+import hl from 'highlight.js'; // 导入代码高亮文件
+import 'highlight.js/styles/vs2015.css'; // 导入代码高亮样式
 import { ElMessage } from 'element-plus';
+
 export default function (app: any): void {
   app.directive('copy', {
     /* ... */
-    mounted(el: any, binding: any): void {
+    mounted(el: HTMLElement, binding: any): void {
       el.setAttribute('data-clipboard-text', binding.value);
       let clipboard: any;
       el.addEventListener('click', () => {
@@ -31,6 +34,16 @@ export default function (app: any): void {
           text: () => binding.value,
         });
       });
+    },
+  });
+  app.directive('hl', {
+    mounted(el: HTMLElement): void {
+      // const blocks = el;
+      const lang = el.getAttribute('lang') || 'html';
+      hl.configure({
+        languages: [lang],
+      });
+      hl.highlightElement(el);
     },
   });
 }
