@@ -7,13 +7,13 @@
       <el-tag
         round
         effect="dark"
-        type="warning"
+        :type="['danger', 'info', 'warning'][index % 3]"
         class="t-pointer"
         style="margin: 5px 2px"
-        v-for="(item, key) in dependencies"
+        v-for="(item, key, index) in dependencies"
         :key="key"
       >
-        {{ key }}<span style="opacity: 0.6">({{ item }})</span>
+        {{ key }}<span style="opacity: 0.7">({{ item }})</span>
       </el-tag>
     </div>
 
