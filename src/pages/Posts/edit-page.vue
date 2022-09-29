@@ -54,9 +54,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-.posts-page {
-  padding: 20px;
-}
 .dark {
   --w-e-toolbar-disabled-color: #aaa;
   --w-e-toolbar-bg-color: #444;

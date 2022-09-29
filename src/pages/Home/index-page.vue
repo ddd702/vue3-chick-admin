@@ -7,7 +7,7 @@
       <el-tag
         round
         effect="dark"
-        :type="['danger', 'info', 'warning'][index % 3]"
+        :type="randomType(index)"
         class="t-pointer"
         style="margin: 5px 2px"
         v-for="(item, key, index) in dependencies"
@@ -50,6 +50,9 @@ export default defineComponent({
     };
   },
   methods: {
+    randomType(index: any): string {
+      return ['danger', 'warning', 'info'][index % 3] || 'info';
+    },
     setChartA() {
       MyChartA = echarts.init(
         (document as any).querySelector('#ec-1'),
