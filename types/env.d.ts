@@ -8,7 +8,7 @@ interface ImportMetaEnv extends Readonly<Record<string, string>> {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
-declare module '*.json'{
+declare module '*.json' {
   const value: any;
   export default value;
 }
