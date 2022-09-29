@@ -1,5 +1,23 @@
 <template>
   <ck-page footer header>
+    <h4 class="title">版本</h4>
+    <div style="padding: 20px 0; font-size: 20px">V{{ version }}</div>
+    <h4 class="title">项目依赖</h4>
+    <div class="dependencies">
+      <el-tag
+        round
+        effect="dark"
+        type="warning"
+        class="t-pointer"
+        style="margin: 5px 2px"
+        v-for="(item, key) in dependencies"
+        :key="key"
+      >
+        {{ key }}<span style="opacity: 0.6">({{ item }})</span>
+      </el-tag>
+    </div>
+
+    <h4 class="title">echart示例</h4>
     <div class="ec-wrapper">
       <div id="ec-2" class="ec-demo"></div>
       <div id="ec-1" class="ec-demo"></div>
@@ -10,6 +28,7 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue';
 import { userStoreInject, layoutStoreInject } from '@/contants';
+import pkgJson from 'root/package.json';
 import * as echarts from 'echarts';
 let MyChartA: any;
 let MyChartB: any;
@@ -26,13 +45,11 @@ export default defineComponent({
     return {
       layoutStore: inject(layoutStoreInject) as any,
       userStore: inject(userStoreInject) as any,
-      num: ref(0),
+      dependencies: ref(pkgJson.dependencies || {}),
+      version: ref(pkgJson.version || '0.0.0'),
     };
   },
   methods: {
-    numAdd() {
-      this.num++;
-    },
     setChartA() {
       MyChartA = echarts.init(
         (document as any).querySelector('#ec-1'),
@@ -135,5 +152,14 @@ export default defineComponent({
   width: 500px;
   height: 400px;
   margin: 15px;
+}
+.title {
+  padding: 10px 0;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(210, 200, 200, 0.5);
+}
+.dependencies {
+  padding: 20px 0;
 }
 </style>

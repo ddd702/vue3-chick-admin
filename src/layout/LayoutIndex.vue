@@ -93,7 +93,7 @@ export default defineComponent({
   &-container {
     min-height: calc(100% - 90px);
     position: relative;
-    padding: 1vw;
+    padding: 20px;
     z-index: 1;
   }
 }

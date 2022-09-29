@@ -7,13 +7,14 @@
         :key="tag.time"
         @close="deleteTag(index)"
         size="large"
-        :round="true"
         class="ck-nav-history-item"
         :closable="tag.route.path !== '/'"
         :disable-transitions="true"
         effect="dark"
         :type="
-          routeStore.currentRoute?.fullPath === tag.route.fullPath ? '' : 'info'
+          routeStore.currentRoute?.fullPath === tag.route.fullPath
+            ? 'primary'
+            : 'info'
         "
       >
         <RouterLink :to="{ path: tag.route.fullPath }">{{
@@ -48,7 +49,6 @@
 import { defineComponent, inject } from 'vue';
 import { RouterLink } from 'vue-router';
 import { routeStoreInject, layoutStoreInject, LangEnum } from '@/contants';
-import { storeToRefs } from 'pinia';
 export default defineComponent({
   setup() {
     const routeStore: any = inject(routeStoreInject);
@@ -112,7 +112,7 @@ export default defineComponent({
   padding-bottom: 8px;
   padding-left: 10px;
   &-item {
-    margin: 0 5px;
+    margin: 0 2px;
   }
   a {
     color: #fff;
