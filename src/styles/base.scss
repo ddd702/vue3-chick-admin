@@ -68,3 +68,24 @@ html {
     }
   }
 }
+.dark {
+  .ck-code-tip {
+    color: #ddd;
+  }
+}
+.ck-code-cell {
+  padding: 10px 0;
+  pre,
+  code {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    border-radius: 4px;
+    padding: 10px;
+  }
+}
+.ck-code-tip {
+  padding: 10px 0;
+  color: #333;
+  font-size: 13px;
+}

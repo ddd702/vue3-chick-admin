@@ -9,14 +9,14 @@
       >
         v-copy
       </el-button>
-      <p class="code-tip">用于复制文本，基于clipboard.js</p>
-      <div class="code-cell">
+      <p class="ck-code-tip">用于复制文本，基于clipboard.js</p>
+      <div class="ck-code-cell">
         <code lang="html" v-hl>{{ copyCode }}</code>
       </div>
     </section>
     <section class="item">
       <el-button type="warning" size="large"> v-hl </el-button>
-      <p class="code-tip">
+      <p class="ck-code-tip">
         用于代码高亮，lang属性若不赋值，默认html,
         <a
           style="color: #999"
@@ -26,7 +26,7 @@
         >
         该指令请用在code，pre元素上,依赖hightlight.js
       </p>
-      <div class="code-cell">
+      <div class="ck-code-cell">
         <pre lang="javascript" v-hl>{{ hlCode }} </pre>
       </div>
     </section>
@@ -69,26 +69,5 @@ export default defineComponent({
 <style lang="scss" scoped>
 .item {
   margin-bottom: 20px;
-}
-.code-cell {
-  padding: 10px 0;
-  pre,
-  code {
-    display: block;
-    width: 100%;
-    overflow: auto;
-    border-radius: 4px;
-    padding: 10px;
-  }
-}
-.dark {
-  .code-tip {
-    color: #ddd;
-  }
-}
-.code-tip {
-  padding: 10px 0;
-  color: #333;
-  font-size: 13px;
 }
 </style>
