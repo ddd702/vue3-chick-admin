@@ -12,9 +12,7 @@
         :disable-transitions="true"
         effect="dark"
         :type="
-          routeStore.currentRoute?.fullPath === tag.route.fullPath
-            ? 'primary'
-            : 'info'
+          routeStore.currentRoute?.fullPath === tag.route.fullPath ? '' : 'info'
         "
       >
         <RouterLink :to="{ path: tag.route.fullPath }">{{
