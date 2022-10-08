@@ -1,5 +1,6 @@
 <template>
   <div class="ck-page">
+    <ck-water-mark :text="userStore.userName" v-if="waterMark" />
     <header class="ck-page-header" v-if="$slots.header || header">
       <slot name="header"></slot>
     </header>
@@ -26,6 +27,11 @@ export default defineComponent({
     };
   },
   props: {
+    waterMark: {
+      //是否需要水印
+      type: Boolean,
+      default: false,
+    },
     footer: {
       //自动填充默认底部
       type: Boolean,

@@ -3,6 +3,7 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import CkIcon from '@/components/CkIcon.vue';
 import CkPage from '@/components/CkPage.vue';
+import CkWaterMark from '@/components/CkWaterMark.vue';
 import i18n from '@/locale';
 //引入 nprogress
 import NProgress from 'nprogress'; // 进度条
@@ -38,6 +39,7 @@ import './styles/iconfont/iconfont.css';
   //注册全局组件
   app.component('CkIcon', CkIcon);
   app.component('CkPage', CkPage);
+  app.component('CkWaterMark', CkWaterMark);
   app.mount('#app');
   const layoutStore = useLayoutStore();
   const logStore = useLogStore();

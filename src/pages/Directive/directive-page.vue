@@ -38,7 +38,7 @@ export default defineComponent({
   meta: {
     path: '/directive',
     title: '自定义指令',
-    enTitle: 'directive',
+    enTitle: 'Directive',
     auth: false,
     cache: true,
   },
