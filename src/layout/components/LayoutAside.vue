@@ -1,5 +1,11 @@
 <template>
   <div class="ck-aside" :class="{ fold: !layoutStore.leftMenuOpen }">
+    <ck-icon
+      class="icon-fold phone-fold"
+      size="20"
+      v-if="layoutStore.leftMenuOpen"
+      @click="layoutStore.switchLeftMenu"
+    />
     <div class="ck-logo"></div>
     <div class="ck-aside-inner" v-loading="loading">
       <el-menu
@@ -36,6 +42,9 @@ export default defineComponent({
     this.fetchData();
   },
   methods: {
+    // toggleMenu() {
+    //   this.layoutStore.switchLeftMenu();
+    // },
     async fetchData() {
       this.loading = true;
       const res = await getDataByCode({ code: 'clay-menu' }).finally(() => {
@@ -53,6 +62,7 @@ export default defineComponent({
 }
 .ck {
   &-logo {
+    position: relative;
     background-image: var(--ck-logo-bg, transparent);
     background-repeat: no-repeat;
     background-position: center;
@@ -71,11 +81,14 @@ export default defineComponent({
     padding: 10px 0;
     overflow-y: auto;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    z-index: 2;
+    z-index: 10;
     width: var(--ck-header-left-width);
     background-color: var(--ck-aside-bg-color, #fff);
     flex-direction: column;
     transition: width 0.5s;
+    .phone-fold {
+      display: none;
+    }
     &-menu {
       width: 100%;
     }
@@ -103,6 +116,13 @@ export default defineComponent({
       &.fold {
         width: 0;
         overflow-x: hidden;
+      }
+      .phone-fold {
+        display: block;
+        position: absolute;
+        top: var(--ck-logo-height);
+        transform: translateY(-100%);
+        right: 10px;
       }
     }
     &-aside-inner {

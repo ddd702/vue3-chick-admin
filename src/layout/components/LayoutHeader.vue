@@ -1,7 +1,7 @@
 <template>
   <header class="ck-header" :class="{ fold: !layoutStore.leftMenuOpen }">
     <div class="ck-header-t">
-      <span class="t-pointer menu-toggle" @click="toggleMenu">
+      <span class="t-pointer menu-toggle" @click="layoutStore.switchLeftMenu">
         <ck-icon
           class="icon-fold"
           :size="iconSize"
@@ -221,9 +221,6 @@ export default defineComponent({
       }).then(() => {
         this.userStore.loginOut(() => location.reload());
       });
-    },
-    toggleMenu() {
-      this.layoutStore.switchLeftMenu();
     },
     toggleDrak() {
       this.layoutStore.switchDark();

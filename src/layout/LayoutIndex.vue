@@ -100,9 +100,7 @@ export default defineComponent({
 @media (max-width: 500px) {
   .ck {
     &-wrapper {
-      &.fold {
-        padding-left: 0;
-      }
+      padding-left: 0 !important;
     }
   }
 }
