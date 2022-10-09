@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     count: {
       type: Number,
-      default: 20,
+      default: 25,
     },
     size: {
       type: Number,
@@ -30,8 +30,7 @@ export default defineComponent({
   },
   methods: {
     getWidth() {
-      const width = this.text.length * this.size;
-      return width + 'px';
+      return '20%';
     },
   },
 });
