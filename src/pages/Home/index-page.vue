@@ -20,7 +20,11 @@
         v-for="(item, key, index) in dependencies"
         :key="key"
       >
-        <a target="_blank" :href="`https://www.npmjs.com/package/${key}`">
+        <a
+          style="color: #fff"
+          target="_blank"
+          :href="`https://www.npmjs.com/package/${key}`"
+        >
           {{ key }}<span style="opacity: 0.7">({{ item }})</span>
         </a>
       </el-tag>
