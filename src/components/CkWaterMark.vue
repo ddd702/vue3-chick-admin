@@ -30,8 +30,8 @@ export default defineComponent({
   },
   methods: {
     getWidth() {
-      const width = 20;
-      return width + '%';
+      const width = this.text.length * this.size;
+      return width + 'px';
     },
   },
 });
@@ -41,6 +41,8 @@ export default defineComponent({
   display: flex;
   z-index: -1;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   opacity: 0.2;
   color: #999;
   font-weight: bold;

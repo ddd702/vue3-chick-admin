@@ -43,10 +43,9 @@ service.interceptors.request.use(
     if (!/^https:\/\/|http:\/\//.test(config.url) && !!!config.noToken) {
       const token = Utils.cookies.get(CookieEnum.token);
       if (token && token !== 'undefined') {
-        // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
+        // 让每个请求携带token-- ['token']为自定义key 请根据实际情况自行修改
         config.headers['token'] = token;
       }
-      // config.headers['Content-Type'] = 'application/json;charset=UTF-8'
     }
     return config;
   },

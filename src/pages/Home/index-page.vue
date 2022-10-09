@@ -1,7 +1,14 @@
 <template>
   <ck-page footer header>
     <h4 class="title">版本</h4>
-    <div style="padding: 20px 0; font-size: 20px">V{{ version }}</div>
+    <div style="padding: 20px 0 0 0; font-size: 20px">V{{ version }}</div>
+    <a
+      style="display: inline-block; padding: 10px 0 40px 0; font-size: 20px"
+      href="https://github.com/ddd702/vue3-chick-admin"
+      target="_blank"
+    >
+      Github
+    </a>
     <h4 class="title">项目依赖</h4>
     <div class="dependencies">
       <el-tag
@@ -13,7 +20,9 @@
         v-for="(item, key, index) in dependencies"
         :key="key"
       >
-        {{ key }}<span style="opacity: 0.7">({{ item }})</span>
+        <a target="_blank" :href="`https://www.npmjs.com/package/${key}`">
+          {{ key }}<span style="opacity: 0.7">({{ item }})</span>
+        </a>
       </el-tag>
     </div>
 

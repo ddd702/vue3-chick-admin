@@ -35,6 +35,8 @@ export const opts = {
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   },
+  noToken: false, //true：不带token,false：带token
+  slient: false, //true：不toast错误，false：toast请求错误
 };
 export const promisefy = (
   data: object,

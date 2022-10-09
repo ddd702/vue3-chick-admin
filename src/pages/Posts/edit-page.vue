@@ -1,6 +1,17 @@
 <template>
   <ck-page class="posts-page">
-    <div>
+    <p style="padding: 20px 0">
+      编辑器使用请参考
+      <a
+        style="opacity: 0.7"
+        target="_blank"
+        href="https://www.wangeditor.com/v5/getting-started.html"
+      >
+        wangedit指南
+      </a>
+      本例子只展示基本操作
+    </p>
+    <div style="margin: 0 0 20px 0">
       <Toolbar
         style="border-bottom: 1px solid #ccc"
         :editor="editorRef"
@@ -15,13 +26,21 @@
         @onCreated="onEditorCreated"
       />
     </div>
+    <el-button
+      @click="() => (dialogVisible = true)"
+      type="primary"
+      style="width: 100%"
+      >获取源内容</el-button
+    >
+    <el-dialog v-model="dialogVisible" title="源内容">
+      {{ postHtml }}
+    </el-dialog>
   </ck-page>
 </template>
 
 <script lang="ts">
 import { ref, shallowRef, defineComponent } from 'vue';
 import '@wangeditor/editor/dist/css/style.css';
-import { DomEditor } from '@wangeditor/editor';
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 
 export default defineComponent({
@@ -40,7 +59,13 @@ export default defineComponent({
     const toolbarConfig = {
       excludeKeys: ['fullScreen'],
     };
-    return { postHtml: ref(''), editorRef, toolbarConfig, editorConfig };
+    return {
+      postHtml: ref(''),
+      dialogVisible: ref(false),
+      editorRef,
+      toolbarConfig,
+      editorConfig,
+    };
   },
   unmounted() {
     this.editorRef.destroy();
