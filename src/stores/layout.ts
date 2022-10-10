@@ -50,8 +50,8 @@ const Themes: Array<ThemeType> = [
   {
     name: 'acg',
     title: '动漫',
-    preview: 'https://cdn.zcxnb.cn/acg/69.jpg',
-    darkPreview: 'https://cdn.zcxnb.cn/acg/29.jpg',
+    preview: 'https://cdn.zcxnb.cn/upload/hAqFDpfE69.jpg',
+    darkPreview: 'https://cdn.zcxnb.cn/upload/hAqFDpfE69.jpg',
   },
   {
     name: 'yuanshen',

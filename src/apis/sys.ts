@@ -8,3 +8,6 @@ export function login(data: any): Promise<any> {
 export function getUserConf(): Promise<any> {
   return promisefy({}, '/ajax/userConf');
 }
+export function loginOut(): Promise<any> {
+  return promisefy({}, '/ajax/loginout');
+}

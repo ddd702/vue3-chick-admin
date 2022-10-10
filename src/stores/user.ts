@@ -4,7 +4,7 @@
 import { defineStore } from 'pinia';
 import Utils from '@/utils';
 import { CookieEnum } from '@/contants';
-import { getUserConf } from '@/apis/sys';
+import { getUserConf, loginOut } from '@/apis/sys';
 const defaultUser = {
   id: '-1',
   userName: 'ghost',
@@ -35,11 +35,12 @@ export const useUserStore = defineStore({
     isLogin: (state) => !!state.token,
   },
   actions: {
-    loginOut(
+    async loginOut(
       cb = () => {
         return false;
       } //退出后的回调
     ) {
+      await loginOut();
       Utils.cookies.remove(CookieEnum.token);
       this.setUser(defaultUser);
       cb && cb();
