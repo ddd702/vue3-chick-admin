@@ -17,6 +17,7 @@ import { useLayoutStore } from '@/stores/layout';
 import { useUserStore } from '@/stores/user';
 import { useRouteStore } from '@/stores/route';
 import { useLogStore, LogEnum } from '@/stores/log';
+import { AppEnum } from '@/contants';
 import 'element-plus/dist/index.css';
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import './styles/app.scss';
@@ -70,7 +71,7 @@ import './styles/iconfont/iconfont.css';
 
   // 进度条开始
   router.beforeEach((to, from, next) => {
-    Utils.setTitle(to.meta.title || '我的管理系统');
+    Utils.setTitle(to.meta.title || AppEnum.title);
     routeStore.addCache(to);
     routeStore.setCurrentRoute(to);
     layoutStore.updateAsideMenuActive();

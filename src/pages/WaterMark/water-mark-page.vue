@@ -19,7 +19,7 @@ export default defineComponent({
   meta: {
     path: '/watermark',
     title: '水印',
-    enTitle: 'WaterMark',
+    enTitle: 'Water Mark',
     auth: false,
     cache: false,
   },

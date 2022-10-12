@@ -46,10 +46,10 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
 export default defineComponent({
   meta: {
     path: '/editpost',
-    title: '文章编写',
-    enTitle: 'Create Post',
-    auth: true,
-    cache: true,
+    title: '富文本编辑',
+    enTitle: 'Rich Editor',
+    auth: false,
+    cache: false,
   },
   name: 'editpost',
   components: { Editor, Toolbar },
