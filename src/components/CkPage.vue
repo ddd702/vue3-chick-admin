@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, reactive } from 'vue';
 import { layoutStoreInject, userStoreInject } from '@/contants';
 import Utils from '@/utils';
 export default defineComponent({

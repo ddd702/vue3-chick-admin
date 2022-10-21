@@ -1,5 +1,11 @@
 <template>
   <ck-page :waterMark="waterMark" class="water-mark-page">
+    <ck-water-mark
+      v-if="imageWaterMark"
+      isImage
+      :rotate="-5"
+      text="https://cdn.zcxnb.cn/upload/Dttug5qVUf.png"
+    />
     <div class="ck-code-cell">
       <pre lang="javascript" v-hl>{{ code }} </pre>
     </div>
@@ -10,6 +16,15 @@
       active-text="打开水印"
       inactive-text="去掉水印"
     />
+    <div>
+      <el-switch
+        v-model="imageWaterMark"
+        size="large"
+        style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        active-text="打开有图的水印"
+        inactive-text="去掉有图的水印"
+      />
+    </div>
   </ck-page>
 </template>
 
@@ -26,6 +41,7 @@ export default defineComponent({
   name: 'watermark',
   setup() {
     return {
+      imageWaterMark: ref(false),
       waterMark: ref(true),
       code: `
 /**
