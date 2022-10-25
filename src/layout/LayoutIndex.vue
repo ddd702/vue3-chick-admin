@@ -34,9 +34,9 @@ export default defineComponent({
     LayoutAside,
   },
   setup() {
-    const layoutStore = useLayoutStore();
-    const routeStore = useRouteStore();
-    const userStore = useUserStore();
+    const layoutStore: any = useLayoutStore();
+    const routeStore: any = useRouteStore();
+    const userStore: any = useUserStore();
     return {
       layoutStore,
       routeStore,
