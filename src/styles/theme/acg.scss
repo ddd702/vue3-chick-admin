@@ -1,19 +1,23 @@
 
 .ck-theme-acg {
   --ck-wrapper-bg-image:url(https://cdn.zcxnb.cn/upload/hAqFDpfE69.jpg);
-  --ck-header-bg-color: rgba(255, 255, 255, 1);
+  --ck-header-bg-color: rgba(155, 255, 255, 0.8);
   --ck-page-bg-color: rgba(255, 255, 255, 0.9);
-  --ck-aside-bg-color:rgba(48, 52, 69,0.9);
+  --ck-aside-bg-color:rgba(48, 52, 69,0.8);
   --el-menu-text-color:rgb(255, 239, 239);
   --el-menu-active-color:rgb(215, 235, 116);
   --el-menu-hover-bg-color:#333;
   --el-menu-bg-color:rgba(48, 52, 69,0.8);
   &.dark{
     --ck-aside-bg-color:rgba(73, 100, 208,0.2);
-    --ck-page-bg-color: rgba(5, 5, 5, 0.75);
+    --ck-page-bg-color: rgba(5, 5, 5, 0.8);
     --ck-header-bg-color: rgba(5,5,5,0.7);
     --el-menu-text-color: #fff;
     --el-menu-hover-bg-color:rgb(110, 103, 103);
     --el-menu-active-color:rgb(252, 187, 130);
+  }
+  .ck-aside,.ck-header{
+    -webkit-backdrop-filter: blur(7px);
+    backdrop-filter: blur(7px);
   }
 }
