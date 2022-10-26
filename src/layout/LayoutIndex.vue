@@ -1,16 +1,18 @@
 <template>
-  <LayoutAside />
-  <div class="ck-wrapper" key="" :class="{ fold: !layoutStore.leftMenuOpen }">
-    <!-- <div class="ck-right" > -->
-    <LayoutHeader />
-    <div class="ck-container">
-      <RouterView v-slot="{ Component }">
-        <Transition name="fade">
-          <KeepAlive :include="routeStore.keepAlive">
-            <component :is="Component" />
-          </KeepAlive>
-        </Transition>
-      </RouterView>
+  <div class="ck-layout" id="layout">
+    <LayoutAside />
+    <div class="ck-wrapper" key="" :class="{ fold: !layoutStore.leftMenuOpen }">
+      <!-- <div class="ck-right" > -->
+      <LayoutHeader />
+      <div class="ck-container">
+        <RouterView v-slot="{ Component }">
+          <Transition name="fade">
+            <KeepAlive :include="routeStore.keepAlive">
+              <component :is="Component" />
+            </KeepAlive>
+          </Transition>
+        </RouterView>
+      </div>
     </div>
   </div>
 </template>
@@ -65,9 +67,18 @@ export default defineComponent({
   opacity: 1;
 }
 .ck {
+  &-layout {
+    background-color: var(--ck-main-bg-color, #fff);
+    background-image: var(--ck-wrapper-bg-image, none);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100%;
+  }
   &-wrapper {
     width: 100%;
-    min-height: 100%;
+    min-height: 100vh;
     transition: padding 0.5s;
     background-color: var(--ck-page-bg-color);
     padding-left: var(--ck-header-left-width);
