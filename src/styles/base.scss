@@ -31,6 +31,9 @@ html {
   --ck-aside-bg-color:#222;
   --ck-scroll-bar-body-bg:rgb(32, 29, 44);
   // --aside-r-border-color:rgb(32, 29, 44);
+  .ck-code-tip {
+    color: #ddd;
+  }
 }
 .el-breadcrumb{
   font-size:var(--el-font-size-base,14px);
@@ -66,11 +69,6 @@ html {
     &::-webkit-scrollbar-track{
       background-color:var(--ck-scroll-bar-body-bg,#fff);
     }
-  }
-}
-.dark {
-  .ck-code-tip {
-    color: #ddd;
   }
 }
 .ck-code-cell {

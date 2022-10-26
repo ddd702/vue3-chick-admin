@@ -69,32 +69,16 @@ export default defineComponent({
     width: 100%;
     min-height: 100%;
     transition: padding 0.5s;
-    background-image: var(--ck-wrapper-bg-image, none);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    background-color: var(--ck-page-bg-color);
     padding-left: var(--ck-header-left-width);
     &.fold {
       padding-left: var(--ck-header-left-width-fold);
-    }
-    &::after {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--ck-page-bg-color);
-      display: block;
-      z-index: 0;
-      content: '';
     }
   }
   &-container {
     min-height: calc(100% - 90px);
     position: relative;
     padding: 20px;
-    z-index: 1;
   }
 }
 @media (max-width: 500px) {
