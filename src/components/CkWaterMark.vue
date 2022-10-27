@@ -96,7 +96,6 @@ export default defineComponent({
 <style lang="scss">
 .ck-water-mark-wrapper {
   display: flex;
-  z-index: -1;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
