@@ -1,11 +1,11 @@
 <template>
+  <ck-water-mark
+    v-if="imageWaterMark"
+    isImage
+    :rotate="-5"
+    text="https://cdn.zcxnb.cn/upload/Dttug5qVUf.png"
+  />
   <ck-page :waterMark="waterMark" class="water-mark-page">
-    <ck-water-mark
-      v-if="imageWaterMark"
-      isImage
-      :rotate="-5"
-      text="https://cdn.zcxnb.cn/upload/Dttug5qVUf.png"
-    />
     <div class="ck-code-cell">
       <pre lang="javascript" v-hl>{{ code }} </pre>
     </div>

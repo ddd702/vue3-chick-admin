@@ -1,15 +1,18 @@
 <template>
+  <ck-water-mark :text="userStore.userName" v-if="waterMark" />
   <div class="ck-page">
-    <ck-water-mark :text="userStore.userName" v-if="waterMark" />
     <header class="ck-page-header" v-if="$slots.header || header">
       <slot name="header"></slot>
     </header>
     <main class="ck-page-main">
-      <slot />
+      <slot>现在请开始编写你的页面吧</slot>
     </main>
     <footer class="ck-page-footer" v-if="$slots.footer || footer">
       <slot name="footer">
-        <div class="t-footer">Copyright©2022 Chick Admin</div>
+        <div class="t-footer">
+          <p>Copyright©2022 Chick Admin</p>
+          <p>Ver {{ version }}</p>
+        </div>
       </slot>
     </footer>
   </div>
@@ -18,10 +21,12 @@
 <script lang="ts">
 import { defineComponent, inject, reactive } from 'vue';
 import { layoutStoreInject, userStoreInject } from '@/contants';
+import pkgJson from 'root/package.json';
 import Utils from '@/utils';
 export default defineComponent({
   setup() {
     return {
+      version: pkgJson.version || '0.0.0',
       layoutStore: inject(layoutStoreInject) as any,
       userStore: inject(userStoreInject) as any,
     };
@@ -59,4 +64,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.ck-page {
+  position: relative;
+}
+</style>
