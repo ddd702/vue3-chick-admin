@@ -1,21 +1,23 @@
 <template>
-  <ck-water-mark :text="userStore.userName" v-if="waterMark" />
-  <div class="ck-page">
-    <header class="ck-page-header" v-if="$slots.header || header">
-      <slot name="header"></slot>
-    </header>
-    <main class="ck-page-main">
-      <slot>现在请开始编写你的页面吧</slot>
-    </main>
-    <footer class="ck-page-footer" v-if="$slots.footer || footer">
-      <slot name="footer">
-        <div class="t-footer">
-          <p>Copyright©2022 Chick Admin</p>
-          <p>Ver {{ version }}</p>
-        </div>
-      </slot>
-    </footer>
-  </div>
+  <main>
+    <ck-water-mark :text="userStore.userName" v-if="waterMark" />
+    <div class="ck-page">
+      <header class="ck-page-header" v-if="$slots.header || header">
+        <slot name="header"></slot>
+      </header>
+      <main class="ck-page-main">
+        <slot>现在请开始编写你的页面吧</slot>
+      </main>
+      <footer class="ck-page-footer" v-if="$slots.footer || footer">
+        <slot name="footer">
+          <div class="t-footer">
+            <p>Copyright©2022 Chick Admin</p>
+            <p>Ver {{ version }}</p>
+          </div>
+        </slot>
+      </footer>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
