@@ -2,7 +2,8 @@
   "files": [],
   "compilerOptions": {
     // ...
-    "types": ["element-plus/global","./types"]
+    "types": ["element-plus/global","./types"],
+    "suppressImplicitAnyIndexErrors": true
   },
   "references": [
     {
