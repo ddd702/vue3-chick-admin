@@ -1,8 +1,9 @@
 <template>
   <div class="ck-nav-history">
-    <el-scrollbar view-class="t-flex">
+    <el-scrollbar ref="scrollbarRef" view-class="t-flex">
       <!-- <div class="scrollbar-flex-content"> -->
       <el-tag
+        :id="`CkNav-${index}`"
         v-for="(tag, index) in routeStore.cache"
         :key="tag.time"
         @close="deleteTag(index)"
@@ -11,6 +12,7 @@
         :closable="tag.route.path !== '/'"
         :disable-transitions="true"
         effect="dark"
+        round
         :type="
           routeStore.currentRoute?.fullPath === tag.route.fullPath ? '' : 'info'
         "
@@ -44,14 +46,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { ElScrollbar } from 'element-plus';
 import { routeStoreInject, layoutStoreInject, LangEnum } from '@/contants';
 export default defineComponent({
   setup() {
     const routeStore: any = inject(routeStoreInject);
     const layoutStore: any = inject(layoutStoreInject);
     return {
+      // scrollbarRef: ref<InstanceType<typeof ElScrollbar>>(),
       routeStore,
       layoutStore,
     };
@@ -59,7 +63,21 @@ export default defineComponent({
   components: {
     RouterLink,
   },
+  mounted() {
+    this.setScrollLeft();
+    this.routeStore.$subscribe(() => {
+      this.setScrollLeft();
+    });
+  },
   methods: {
+    setScrollLeft() {
+      const $targetNav: any = document.querySelector(
+        `#CkNav-${this.routeStore.nowCacheIndex}`
+      );
+      (
+        this.$refs['scrollbarRef'] as InstanceType<typeof ElScrollbar>
+      )?.setScrollLeft($targetNav?.offsetLeft);
+    },
     getTitle(tag: any) {
       if (this.layoutStore.lang === LangEnum.en) {
         return tag.route.meta.enTitle || tag.route.meta.title || 'unkown';

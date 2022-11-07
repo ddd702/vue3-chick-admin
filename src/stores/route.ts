@@ -78,6 +78,7 @@ export const useRouteStore = defineStore({
       //删除当前外的其他缓存路径
       const { nowCacheIndex } = this;
       this.cache = [this.cache[nowCacheIndex]];
+      Utils.storage.set(StorageEnum.routeCache, this.cache);
     },
     delCache(index: number): void {
       this.cache.splice(index, 1);
