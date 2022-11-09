@@ -60,11 +60,21 @@ export const useRouteStore = defineStore({
     },
     nowCacheIndex(state): number {
       return state.cache.findIndex(
-        (n) => n.route.path === state?.currentRoute?.path
+        (n) => n.route.fullPath === state?.currentRoute?.fullPath
       );
     },
   },
   actions: {
+    updateCache(metaObj = {}): void {
+      const { cache } = this;
+      cache[this.nowCacheIndex].route.meta = Object.assign(
+        {},
+        cache[this.nowCacheIndex].route.meta,
+        metaObj
+      );
+      this.cache = cache;
+      Utils.storage.set(StorageEnum.routeCache, this.cache);
+    },
     clearCache(): void {
       this.cache = [];
     },
@@ -95,7 +105,9 @@ export const useRouteStore = defineStore({
         return;
       }
       //查一次原数组是否有此路径，有的话不做操作
-      const delIndex = this.cache.findIndex((n) => n.route.path === path);
+      const delIndex = this.cache.findIndex(
+        (n) => n.route.fullPath === fullPath
+      );
       // delIndex >= 0 && this.cache.splice(delIndex, 1);
       if (delIndex >= 0) {
         return;

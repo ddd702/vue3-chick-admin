@@ -26,7 +26,6 @@ export async function requestFun(
       });
     }
   } catch (e: any) {
-    console.warn(e.message);
     reject(e);
   }
   resolve(res.data);
@@ -36,15 +35,19 @@ export const opts = {
     'Content-Type': 'application/json;charset=UTF-8',
   },
   noToken: false, //true：不带token,false：带token
-  slient: false, //true：不toast错误，false：toast请求错误
+  silent: false, //true：不toast错误，false：toast请求错误
 };
 export const promisefy = (
-  data: object,
+  data: any,
   url: string,
   type = 'post',
   otherOpts: any = {}
 ): Promise<void> =>
   new Promise(async (resolve, reject) => {
+    if (data.hasOwnProperty('_silent')) {
+      opts.silent = true;
+      delete data['_silent'];
+    }
     requestFun(resolve, reject, {
       type,
       data,

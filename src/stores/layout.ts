@@ -75,6 +75,11 @@ export const useLayoutStore = defineStore({
     }
     const defaultLang = Utils.storage.get(StorageEnum.lang) || 'zh-cn';
     i18n.global.locale = defaultLang;
+    const isMiniScreen =
+      (document as any).querySelector('html')?.offsetWidth <= 500;
+    if (isMiniScreen) {
+      (document as any).querySelector('html').classList.add('is-phone');
+    }
     return {
       langList: [
         {
@@ -91,7 +96,7 @@ export const useLayoutStore = defineStore({
       leftMenuOpen,
       asideMenuActive: '0',
       dark,
-      isMiniScreen: (document as any).querySelector('html')?.offsetWidth <= 500,
+      isMiniScreen,
       asideMenu: [],
       pathLog: [],
       themes: Themes,
@@ -155,12 +160,12 @@ export const useLayoutStore = defineStore({
         return;
       }
       // 根据路径更新active的index
-      const { path } = route;
+      const { fullPath } = route;
       let outIndex = '';
       let tempArr: any = [];
       const findIndex = (item: any) => {
         tempArr.push(item);
-        if (item.path === path) {
+        if (item.path === fullPath) {
           this.pathLog = tempArr;
           outIndex = item.hash;
           return;

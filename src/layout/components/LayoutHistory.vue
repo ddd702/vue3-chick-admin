@@ -13,13 +13,20 @@
         :disable-transitions="true"
         effect="dark"
         round
+        :title="getTitle(tag)"
         :type="
           routeStore.currentRoute?.fullPath === tag.route.fullPath ? '' : 'info'
         "
       >
-        <RouterLink :to="{ path: tag.route.fullPath }">{{
+        <div
+          @click="Utils.toPath(tag.route.fullPath)"
+          class="ck-nav-history-href t-pointer"
+        >
+          {{ getTitle(tag) }}
+        </div>
+        <!-- <RouterLink :to="{ path: tag.route.fullPath }">{{
           getTitle(tag)
-        }}</RouterLink>
+        }}</RouterLink> -->
       </el-tag>
       <!-- </div> -->
     </el-scrollbar>
@@ -47,8 +54,9 @@
 
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue';
-import { RouterLink } from 'vue-router';
+// import { RouterLink } from 'vue-router';
 import { ElScrollbar } from 'element-plus';
+import Utils from '@/utils';
 import { routeStoreInject, layoutStoreInject, LangEnum } from '@/contants';
 export default defineComponent({
   setup() {
@@ -58,22 +66,29 @@ export default defineComponent({
       // scrollbarRef: ref<InstanceType<typeof ElScrollbar>>(),
       routeStore,
       layoutStore,
+      Utils,
     };
   },
   components: {
-    RouterLink,
+    // RouterLink,
   },
   mounted() {
     this.setScrollLeft();
-    this.routeStore.$subscribe(() => {
+    this.routeStore.$subscribe(async () => {
+      await Utils.sleep(0.2);
       this.setScrollLeft();
     });
   },
   methods: {
     setScrollLeft() {
-      const $targetNav: any = document.querySelector(
+      let $targetNav: any = document.querySelector(
         `#CkNav-${this.routeStore.nowCacheIndex}`
       );
+      if (!$targetNav) {
+        $targetNav = document.querySelector(
+          `#CkNav-${this.routeStore.cacheCount - 2}`
+        );
+      }
       (
         this.$refs['scrollbarRef'] as InstanceType<typeof ElScrollbar>
       )?.setScrollLeft($targetNav?.offsetLeft);
@@ -91,16 +106,16 @@ export default defineComponent({
       }
       const cacheCount = this.routeStore.cacheCount;
       if (
-        this.routeStore.cache[index].route.path ===
-        this.routeStore.currentRoute?.path
+        this.routeStore.cache[index].route.fullPath ===
+        this.routeStore.currentRoute?.fullPath
       ) {
         if (this.routeStore.cache.length >= 1) {
           const nextIndex = index == 0 ? index + 1 : index - 1;
           if (nextIndex >= cacheCount) {
             this.$router.replace({ path: '/' });
           } else {
-            const path = this.routeStore.cache[nextIndex].route.path;
-            this.$router.replace({ path });
+            const path = this.routeStore.cache[nextIndex].route.fullPath;
+            this.$router.replace(path);
           }
         }
       }
@@ -133,6 +148,10 @@ export default defineComponent({
   a {
     color: #fff;
   }
+}
+.ck-nav-history-href {
+  max-width: 170px;
+  @include ellipsis();
 }
 .ck-nav-menu {
   @include flexCenter();

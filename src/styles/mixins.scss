@@ -45,3 +45,30 @@
     left: -10px;
   }
 }
+/*
+* @name:  文本隐藏 (text-indent: -9999px;有性能问题)
+* @param: $support-for-ie {boolean}  是否支持IE6
+*/
+
+@mixin text-hide($support-for-ie:true) {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  @if $support-for-ie {
+      *text-indent: -9999px;
+      *text-align: left;
+  }
+}
+@mixin ellipsis() {
+overflow: hidden;
+white-space: nowrap;
+word-break: keep-all;
+text-overflow: ellipsis;
+}
+@mixin clamp($n:2){
+  word-break: break-all;
+  display: -webkit-box;   
+  -webkit-box-orient: vertical;  
+  -webkit-line-clamp: $n;   
+  overflow: hidden;  
+}

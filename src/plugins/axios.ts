@@ -88,11 +88,11 @@ service.interceptors.response.use(
         case 200:
           // [ 示例 ] code === 0 代表没有错误
           return dataAxios;
-          break;
         default:
           // 不是正确的 code
           // 如果config或者data里面有silent字段，不弹出信息
           if (!response.config.silent) {
+            console.info('axios info', response.config);
             if (response.config.params && response.config.params.silent) {
               break;
             }
@@ -100,10 +100,9 @@ service.interceptors.response.use(
               break;
             }
             errorCreat({ msg: `${errMsg}`, otherinfo });
-          } else {
-            throw new Error(errMsg);
           }
-          break;
+          return Promise.reject({ message: errMsg });
+        // throw new Error(errMsg);
       }
     }
   },
