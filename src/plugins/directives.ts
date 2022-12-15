@@ -34,7 +34,7 @@ export default function (app: any): void {
       //解决clipboard第一次点击不生效问题，那就在enter时实例化Clipboard
       el.addEventListener('mouseenter', () => {
         clipboard = new Clipboard(el, {
-          text: () => el.getAttribute('data-clipboard-text'),
+          text: () => el.getAttribute('data-clipboard-text') || '',
         });
       });
     },

@@ -55,7 +55,7 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue';
 // import { RouterLink } from 'vue-router';
-import { ElScrollbar } from 'element-plus';
+import type { ElScrollbar } from 'element-plus';
 import Utils from '@/utils';
 import { routeStoreInject, layoutStoreInject, LangEnum } from '@/contants';
 export default defineComponent({
