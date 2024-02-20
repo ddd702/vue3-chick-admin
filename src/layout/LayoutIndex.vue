@@ -1,6 +1,11 @@
 <template>
   <div class="ck-layout" id="layout">
     <LayoutAside />
+    <div
+      v-if="layoutStore.leftMenuOpen && layoutStore.isMiniScreen"
+      class="ck-layout-mask"
+      @click.stop="layoutStore.switchLeftMenu"
+    ></div>
     <div class="ck-wrapper" key="" :class="{ fold: !layoutStore.leftMenuOpen }">
       <!-- <div class="ck-right" > -->
       <LayoutHeader />
@@ -75,6 +80,16 @@ export default defineComponent({
     background-size: cover;
     background-attachment: fixed;
     min-height: 100%;
+  }
+  &-layout-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 209;
+    background-color: #000;
+    opacity: 0.7;
   }
   &-wrapper {
     width: 100%;

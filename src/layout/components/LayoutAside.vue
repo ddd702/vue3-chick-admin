@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, inject, ref } from 'vue';
 import { layoutStoreInject } from '@/contants';
-import { getDataByCode } from '@/apis/sys';
+import { getMenuConf } from '@/apis/sys';
 import AsideMenuItem from './AsideMenuItem.vue';
 export default defineComponent({
   components: { AsideMenuItem },
@@ -47,7 +47,7 @@ export default defineComponent({
     // },
     async fetchData() {
       this.loading = true;
-      const res = await getDataByCode({ code: 'clay-menu' }).finally(() => {
+      const res = await getMenuConf().finally(() => {
         this.loading = false;
       });
       this.layoutStore.setAsideMenu(JSON.parse(res.data));
@@ -79,9 +79,9 @@ export default defineComponent({
     left: 0;
     height: 100%;
     padding: 10px 0;
+    z-index: 210;
     overflow-y: auto;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    z-index: 10;
     width: var(--ck-header-left-width);
     background-color: var(--ck-aside-bg-color, #fff);
     flex-direction: column;
