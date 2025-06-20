@@ -22,8 +22,7 @@ type StateType = {
   visible: boolean;
   list: Array<ItemType>;
 };
-export const useLogStore = defineStore({
-  id: 'log',
+export const useLogStore = defineStore('log', {
   state(): StateType {
     return {
       visible: false,

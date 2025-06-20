@@ -1,6 +1,6 @@
-@import './base.scss';
-@import './theme/acg.scss';
-@import './theme/yuanshen.scss';
+@use './base.scss' as *;
+@use './theme/acg.scss' as *;
+@use './theme/yuanshen.scss' as *;
 html{
   height: 100%;
 }

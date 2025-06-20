@@ -27,8 +27,7 @@ type StateType = {
   currentRoute: RouteLocationNormalized | null;
   cache: Array<CacheType>;
 };
-export const useRouteStore = defineStore({
-  id: 'route',
+export const useRouteStore = defineStore('route', {
   state(): StateType {
     const localCache = Utils.storage.get(StorageEnum.routeCache) || '[]';
     return {

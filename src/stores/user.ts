@@ -16,8 +16,7 @@ type StateType = {
   userName: string;
   avatar: string;
 };
-export const useUserStore = defineStore({
-  id: 'user',
+export const useUserStore = defineStore('user', {
   state(): StateType {
     let initialState = JSON.parse(JSON.stringify(defaultUser));
     try {

@@ -60,8 +60,7 @@ const Themes: Array<ThemeType> = [
       'https://cdn.zcxnb.cn/cloud/2022/07/04/LySZm5gH_thread_15588254_20220703101601_s_7023034_o_w_3400_h_2744_40845.jpg',
   },
 ];
-export const useLayoutStore = defineStore({
-  id: 'layout',
+export const useLayoutStore = defineStore('layout', {
   state(): StateType {
     let dark: boolean = Utils.isDarkMode();
     if (Utils.storage.get(StorageEnum.dark)) {
